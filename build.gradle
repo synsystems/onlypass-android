@@ -1,0 +1,53 @@
+buildscript {
+  repositories {
+    jcenter()
+    google()
+
+    maven {
+      url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.0.1'
+    classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-SNAPSHOT'
+  }
+}
+
+plugins {
+  id 'org.ajoberstar.grgit' version '2.1.0'
+}
+
+allprojects {
+  repositories {
+    jcenter()
+    google()
+    mavenCentral()
+
+    maven {
+      url 'https://jitpack.io'
+    }
+  }
+}
+
+ext.rootPackageName = 'org.synsystems.onlypass'
+
+apply from: 'git-versioning.gradle'
+
+ext.versionInformation = [
+    versionCode: 1,
+    devVersionName: "dev (${rootProject.ext.describeGitStatus()})",
+    internalTestingVersionName: "internal-test (${rootProject.ext.describeGitStatus()})",
+    externalTestingVersionName: "external-test (${rootProject.ext.describeGitStatus()})",
+    prodVersionName: '0.0.0']
+
+task deleteAllOutputDirectories(dependsOn: [
+    ':app-assembly:deleteOutputDirectories',
+    ':app-components:deleteOutputDirectories',
+    ':app-test-harnesses:deleteOutputDirectories']) {
+
+  delete('out')
+  delete('build')
+}
+
+task buildAllModules(dependsOn: [':app-assembly:build', ':app-components:build', ':app-test-harnesses:build'])
