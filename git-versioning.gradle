@@ -1,0 +1,16 @@
+apply plugin: 'org.ajoberstar.grgit'
+
+ext.describeGitStatus = { ->
+  if (grgit != null) {
+    grgit.open()
+
+    try {
+      return grgit.head().getAbbreviatedId(16) + '-' + (grgit.status().isClean() ? 'unmodified' : 'modified')
+
+    } catch (final Exception e) {
+      throw new RuntimeException('Error describing git status.', e)
+    }
+  }
+
+  return 'untracked'
+}

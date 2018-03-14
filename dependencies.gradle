@@ -1,0 +1,99 @@
+ext.dependencies = [
+    junit: 'junit:junit:4.12',
+
+    mockito: 'org.mockito:mockito-core:1.10.19',
+
+    hamcrest: 'org.hamcrest:hamcrest-all:1.3',
+
+    jsr250: 'javax.annotation:jsr250-api:1.0',
+
+    jsr305: 'com.google.code.findbugs:jsr305:3.0.2',
+
+    rxJava: 'io.reactivex.rxjava2:rxjava:2.1.9',
+
+    rxAndroidCore: 'io.reactivex.rxjava2:rxandroid:2.0.2',
+
+    rxAndroidBindings: 'com.jakewharton.rxbinding2:rxbinding:2.1.1',
+
+    dagger: [
+        core: 'com.google.dagger:dagger:2.9',
+        compiler: 'com.google.dagger:dagger-compiler:2.9',
+        mock: 'com.github.fabioCollini:DaggerMock:0.6-beta1'
+    ],
+
+    dexmaker: [
+        core: 'com.google.dexmaker:dexmaker:1.2',
+        mockitoPlugin: 'com.google.dexmaker:dexmaker-mockito:1.2'
+    ],
+
+    androidSupport: [
+        annotations: 'com.android.support:support-annotations:27.0.2',
+        appCompat: 'com.android.support:appcompat-v7:27.0.2',
+        cardView: 'com.android.support:cardview-v7:27.0.2',
+        design: 'com.android.support:design:27.0.2',
+        percent: 'com.android.support:percent:27.0.2',
+        vectorDrawable: 'com.android.support:support-vector-drawable:27.0.2',
+        animatedVectorDrawable: 'com.android.support:animated-vector-drawable:27.0.2',
+        multidex: 'com.android.support:multidex:1.0.2'
+    ],
+
+    androidTestingSupport: [
+        runner: 'com.android.support.test:runner:0.5',
+        rules: 'com.android.support.test:rules:0.5',
+
+        espresso: [
+            core: 'com.android.support.test.espresso:espresso-core:2.2.2',
+            contrib: 'com.android.support.test.espresso:espresso-contrib:2.2.2',
+            intents: 'com.android.support.test.espresso:espresso-intents:2.2.2'
+        ]
+    ],
+
+    stetho: [
+        core: 'com.facebook.stetho:stetho:1.5.0',
+        okhttp3Plugin: 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    ],
+
+    timber: 'com.jakewharton.timber:timber:4.3.1',
+
+    logger: 'com.orhanobut:logger:2.1.1',
+
+    butterknife: [
+        core: 'com.jakewharton:butterknife:8.6.0',
+        compiler: 'com.jakewharton:butterknife-compiler:8.6.0'
+    ],
+
+    retrofit: [
+        core: 'com.squareup.retrofit2:retrofit:2.3.0',
+        gsonConverter: 'com.squareup.retrofit2:converter-gson:2.3.0'
+    ],
+
+    jodaTime: 'joda-time:joda-time:2.9.9',
+
+    picasso: 'com.squareup.picasso:picasso:2.5.2',
+
+    googlePlayServices: [
+        safetyNet: 'com.google.android.gms:play-services-safetynet:11.8.0',
+    ],
+
+    roundedImageView: 'com.makeramen:roundedimageview:2.3.0',
+
+    autoValue: [
+        core: 'com.google.auto.value:auto-value:1.4.1',
+        compiler: 'com.google.auto.value:auto-value:1.4.1',
+        parcelPlugin: 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.5',
+        parcelPluginCompiler: 'com.ryanharter.auto.value:auto-value-parcel:0.2.5',
+        ignoreHashEqualsPluginCompiler: 'com.github.reggar:auto-value-ignore-hash-equals:1.1.4',
+        redactedPluginCompiler: 'com.squareup.auto.value:auto-value-redacted:1.0.1'
+    ],
+
+    guava: 'com.google.guava:guava:20.0-rc1',
+
+    androidUtilities: 'com.matthew-tamlin:android-utilities:5.1.1',
+
+    androidTestingTools: 'com.matthew-tamlin:android-testing-tools:3.0.1',
+
+    apacheCommons: [
+        lang: 'org.apache.commons:commons-lang3:3.6',
+        io: 'commons-io:commons-io:2.6'
+    ]
+]

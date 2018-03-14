@@ -1,0 +1,96 @@
+apply plugin: 'com.android.application'
+
+android {
+  dexOptions {
+    javaMaxHeapSize '4g'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  defaultConfig {
+    compileSdkVersion 27
+    minSdkVersion 27
+    targetSdkVersion 27
+
+    buildToolsVersion '27.0.3'
+
+    versionCode rootProject.ext.versionInformation.versionCode
+    versionName ''
+
+    applicationId rootProject.ext.rootPackageName
+
+    multiDexEnabled true
+
+    proguardFile 'proguard-rules.pro'
+  }
+
+  buildTypes {
+    dev {
+      versionNameSuffix rootProject.ext.versionInformation.devVersionName
+      applicationIdSuffix '.dev'
+
+      shrinkResources false
+      minifyEnabled false
+      zipAlignEnabled false
+
+      debuggable true
+      jniDebuggable true
+      renderscriptDebuggable true
+      pseudoLocalesEnabled true
+    }
+
+    internalTesting {
+      versionNameSuffix rootProject.ext.versionInformation.internalTestVersionName
+      applicationIdSuffix '.internaltesting'
+
+      shrinkResources false
+      minifyEnabled false
+      zipAlignEnabled false
+
+      debuggable true
+      jniDebuggable true
+      renderscriptDebuggable true
+      pseudoLocalesEnabled true
+    }
+
+    externalTesting {
+      versionNameSuffix rootProject.ext.versionInformation.externalTestVersionName
+      applicationIdSuffix '.externaltesting'
+
+      shrinkResources true
+      minifyEnabled true
+      zipAlignEnabled true
+
+      debuggable false
+      jniDebuggable false
+      renderscriptDebuggable false
+      pseudoLocalesEnabled false
+    }
+
+    prod {
+      versionNameSuffix rootProject.ext.versionInformation.prodVersionName
+      applicationIdSuffix ''
+
+      shrinkResources true
+      minifyEnabled true
+      zipAlignEnabled true
+
+      debuggable false
+      jniDebuggable false
+      renderscriptDebuggable false
+      pseudoLocalesEnabled false
+    }
+  }
+}
+
+dependencies {
+  implementation project(':app-components')
+}
+
+task deleteOutputDirectories {
+  delete('build')
+  delete('out')
+}
