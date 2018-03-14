@@ -1,9 +1,9 @@
 <manifest
-  package="org.synsystems.onlypass"
+  package="org.synsystems.onlypass.apptestharnesses"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <application
-    android:name=".components.App"
+    android:name="org.synsystems.onlypass.components.App"
     android:allowBackup="true"
     android:label="@string/app_name"
     android:supportsRtl="true"/>
