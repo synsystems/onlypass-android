@@ -11,9 +11,9 @@ android {
   }
 
   defaultConfig {
-    compileSdkVersion 27
-    minSdkVersion 27
-    targetSdkVersion 27
+    compileSdkVersion rootProject.ext.sdkVersionInformation.compileSdkVersion
+    minSdkVersion rootProject.ext.sdkVersionInformation.minSdkVersion
+    targetSdkVersion rootProject.ext.sdkVersionInformation.targetSdkVersion
 
     buildToolsVersion '27.0.3'
 

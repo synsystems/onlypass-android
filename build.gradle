@@ -41,6 +41,12 @@ ext.versionInformation = [
     externalTestingVersionName: "external-test (${rootProject.ext.describeGitStatus()})",
     prodVersionName: '0.0.0']
 
+ext.sdkVersionInformation = [
+    minSdkVersion: 27,
+    targetSdkVersion: 27,
+    compileSdkVersion: 27
+]
+
 task deleteAllOutputDirectories(dependsOn: [
     ':app-assembly:deleteOutputDirectories',
     ':app-components:deleteOutputDirectories',
