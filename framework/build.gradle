@@ -26,6 +26,8 @@ android {
     publishNonDefault true
 
     proguardFile 'proguard-rules.pro'
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
