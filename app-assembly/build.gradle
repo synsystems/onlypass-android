@@ -39,6 +39,7 @@ android {
       debuggable true
       jniDebuggable true
       renderscriptDebuggable true
+
       pseudoLocalesEnabled true
     }
 
@@ -53,6 +54,7 @@ android {
       debuggable true
       jniDebuggable true
       renderscriptDebuggable true
+
       pseudoLocalesEnabled true
     }
 
@@ -67,6 +69,7 @@ android {
       debuggable false
       jniDebuggable false
       renderscriptDebuggable false
+
       pseudoLocalesEnabled false
     }
 
@@ -81,6 +84,7 @@ android {
       debuggable false
       jniDebuggable false
       renderscriptDebuggable false
+
       pseudoLocalesEnabled false
     }
   }
