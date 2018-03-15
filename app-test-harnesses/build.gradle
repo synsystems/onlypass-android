@@ -17,7 +17,7 @@ android {
 
     buildToolsVersion '27.0.3'
 
-    versionCode rootProject.ext.versionInformation.versionCode
+    versionCode rootProject.ext.appVersionInformation.versionCode
     versionName ''
 
     applicationId "${rootProject.ext.rootPackageName}.apptestharnesses"
@@ -29,7 +29,7 @@ android {
 
   buildTypes {
     dev {
-      versionNameSuffix rootProject.ext.versionInformation.devVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.devVersionName
       applicationIdSuffix '.dev'
 
       shrinkResources false
@@ -45,7 +45,7 @@ android {
     }
 
     internalTesting {
-      versionNameSuffix rootProject.ext.versionInformation.internalTestingVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.internalTestingVersionName
       applicationIdSuffix '.internaltesting'
 
       shrinkResources false
@@ -59,7 +59,7 @@ android {
     }
 
     externalTesting {
-      versionNameSuffix rootProject.ext.versionInformation.externalTestingVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.externalTestingVersionName
       applicationIdSuffix '.externaltesting'
 
       shrinkResources true
@@ -73,7 +73,7 @@ android {
     }
 
     prod {
-      versionNameSuffix rootProject.ext.versionInformation.prodVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.prodVersionName
       applicationIdSuffix ''
 
       shrinkResources true

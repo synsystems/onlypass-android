@@ -34,7 +34,7 @@ ext.rootPackageName = 'org.synsystems.onlypass'
 
 apply from: 'git-versioning.gradle'
 
-ext.versionInformation = [
+ext.appVersionInformation = [
     versionCode: 1,
     devVersionName: "dev (${rootProject.ext.describeGitStatus()})",
     internalTestingVersionName: "internal-test (${rootProject.ext.describeGitStatus()})",

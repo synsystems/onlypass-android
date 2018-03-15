@@ -18,7 +18,7 @@ android {
 
     buildToolsVersion '27.0.3'
 
-    versionCode rootProject.ext.versionInformation.versionCode
+    versionCode rootProject.ext.appVersionInformation.versionCode
     versionName ''
 
     multiDexEnabled true
@@ -30,19 +30,19 @@ android {
 
   buildTypes {
     dev {
-      versionNameSuffix rootProject.ext.versionInformation.devVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.devVersionName
     }
 
     internalTesting {
-      versionNameSuffix rootProject.ext.versionInformation.internalTestVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.internalTestVersionName
     }
 
     externalTesting {
-      versionNameSuffix rootProject.ext.versionInformation.externalTestingVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.externalTestingVersionName
     }
 
     prod {
-      versionNameSuffix rootProject.ext.versionInformation.prodVersionName
+      versionNameSuffix rootProject.ext.appVersionInformation.prodVersionName
     }
   }
 }
