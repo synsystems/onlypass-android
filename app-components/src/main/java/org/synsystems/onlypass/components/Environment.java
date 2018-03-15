@@ -1,16 +1,27 @@
 package org.synsystems.onlypass.components;
 
 public enum Environment {
-  // Local logging only. Stetho enabled.
+  /**
+   * Environment for active development. Local logging and stetho are enabled, but remote logging is disabled by
+   * default.
+   */
   DEV(true, false, true),
 
-  // Local and remote logging. Stetho enabled.
+  /**
+   * Environment for testing before release to beta. Local logging and stetho are enabled, and remote logging is
+   * enabled by default.
+   */
   INTERNAL_TESTING(true, true, true),
 
-  // Remote logging only. Stetho disabled.
+  /**
+   * Environment for beta testing. Remote logging is enabled by default, but local logging and stetho are disabled.
+   */
   EXTERNAL_TESTING(false, true, false),
 
-  // All logging disabled. Stetho disabled.
+  /**
+   * Environment for release to the general public. Local logging and stetho are disabled, and remote logging is
+   * disabled by default.
+   */
   PROD(false, false, false);
 
   private boolean localLoggingEnabled;
