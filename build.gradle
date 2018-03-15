@@ -44,10 +44,15 @@ ext.versionInformation = [
 task deleteAllOutputDirectories(dependsOn: [
     ':app-assembly:deleteOutputDirectories',
     ':app-components:deleteOutputDirectories',
-    ':app-test-harnesses:deleteOutputDirectories']) {
+    ':app-test-harnesses:deleteOutputDirectories',
+    ':framework:deleteOutputDirectories']) {
 
   delete('out')
   delete('build')
 }
 
-task buildAllModules(dependsOn: [':app-assembly:build', ':app-components:build', ':app-test-harnesses:build'])
+task buildAllModules(dependsOn: [
+    ':app-assembly:build',
+    ':app-components:build',
+    ':app-test-harnesses:build',
+    ':framework:build'])

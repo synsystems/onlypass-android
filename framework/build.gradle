@@ -1,0 +1,78 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+  dexOptions {
+    javaMaxHeapSize '4g'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  defaultConfig {
+    compileSdkVersion 27
+    minSdkVersion 27
+    targetSdkVersion 27
+
+    buildToolsVersion '27.0.3'
+
+    versionCode rootProject.ext.versionInformation.versionCode
+    versionName ''
+
+    multiDexEnabled true
+
+    publishNonDefault true
+
+    proguardFile 'proguard-rules.pro'
+  }
+
+  buildTypes {
+    dev {
+      versionNameSuffix rootProject.ext.versionInformation.devVersionName
+    }
+
+    internalTesting {
+      versionNameSuffix rootProject.ext.versionInformation.internalTestVersionName
+    }
+
+    externalTesting {
+      versionNameSuffix rootProject.ext.versionInformation.externalTestingVersionName
+    }
+
+    prod {
+      versionNameSuffix rootProject.ext.versionInformation.prodVersionName
+    }
+  }
+}
+
+apply from: rootProject.file('dependencies.gradle')
+
+dependencies {
+  implementation project.ext.dependencies.dagger.core
+  annotationProcessor project.ext.dependencies.dagger.compiler
+
+  implementation project.ext.dependencies.butterknife.core
+  annotationProcessor project.ext.dependencies.butterknife.compiler
+
+  compileOnly project.ext.dependencies.autoValue.core
+  annotationProcessor project.ext.dependencies.autoValue.compiler
+
+  implementation project.ext.dependencies.androidUtilities
+
+  api project.ext.dependencies.androidSupport.appCompat
+
+  api project.ext.dependencies.rxJava
+
+  implementation project.ext.dependencies.rxAndroidCore
+
+  implementation project.ext.dependencies.guava
+
+  api project.ext.dependencies.jodaTime
+}
+
+task deleteOutputDirectories {
+  delete('build')
+  delete('out')
+}
