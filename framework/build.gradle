@@ -58,6 +58,8 @@ dependencies {
 
   api project.ext.dependencies.jodaTime
 
+  implementation project.ext.dependencies.guava
+
   testImplementation project.ext.dependencies.junit
 
   testImplementation project.ext.dependencies.hamcrest
