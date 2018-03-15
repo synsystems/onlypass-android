@@ -42,7 +42,7 @@ ext.versionInformation = [
     prodVersionName: '0.0.0']
 
 ext.sdkVersionInformation = [
-    minSdkVersion: 27,
+    minSdkVersion: 19,
     targetSdkVersion: 27,
     compileSdkVersion: 27
 ]
