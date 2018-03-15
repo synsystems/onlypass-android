@@ -55,6 +55,12 @@ dependencies {
   api project.ext.dependencies.rxJava
 
   api project.ext.dependencies.jodaTime
+
+  testImplementation project.ext.dependencies.junit
+
+  testImplementation project.ext.dependencies.hamcrest
+
+  testImplementation project.ext.dependencies.mockito
 }
 
 task deleteOutputDirectories {
