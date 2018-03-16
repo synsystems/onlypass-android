@@ -60,11 +60,12 @@ dependencies {
 
   implementation project.ext.dependencies.guava
 
-  testImplementation project.ext.dependencies.junit
+  androidTestImplementation project.ext.dependencies.junit
 
-  testImplementation project.ext.dependencies.hamcrest
+  androidTestImplementation project.ext.dependencies.dexmaker.core
+  androidTestImplementation project.ext.dependencies.dexmaker.mockitoPlugin
 
-  testImplementation project.ext.dependencies.mockito
+  androidTestImplementation project.ext.dependencies.androidTestingSupport.espresso.core
 }
 
 task deleteOutputDirectories {
