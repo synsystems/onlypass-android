@@ -63,6 +63,10 @@ dependencies {
 
   implementation project.ext.dependencies.stetho.core
   implementation project.ext.dependencies.stetho.okhttp3Plugin
+
+  implementation project.ext.dependencies.timber
+
+  implementation project.ext.dependencies.logger
 }
 
 task deleteOutputDirectories {
