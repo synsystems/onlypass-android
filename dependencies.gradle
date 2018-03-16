@@ -57,6 +57,8 @@ ext.dependencies = [
 
     logger: 'com.orhanobut:logger:2.1.1',
 
+    crashlytics: 'com.crashlytics.sdk.android:crashlytics:2.9.0@aar',
+
     butterknife: [
         core: 'com.jakewharton:butterknife:8.6.0',
         compiler: 'com.jakewharton:butterknife-compiler:8.6.0'
