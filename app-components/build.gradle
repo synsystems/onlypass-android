@@ -55,23 +55,11 @@ dependencies {
   implementation project.ext.dependencies.dagger.core
   annotationProcessor project.ext.dependencies.dagger.compiler
 
-  implementation project.ext.dependencies.butterknife.core
-  annotationProcessor project.ext.dependencies.butterknife.compiler
-
-  compileOnly project.ext.dependencies.autoValue.core
-  annotationProcessor project.ext.dependencies.autoValue.compiler
-
-  implementation project.ext.dependencies.androidUtilities
-
   api project.ext.dependencies.androidSupport.appCompat
 
   api project.ext.dependencies.rxJava
 
-  implementation project.ext.dependencies.rxAndroidCore
-
   implementation project.ext.dependencies.guava
-
-  api project.ext.dependencies.jodaTime
 
   implementation project.ext.dependencies.stetho.core
   implementation project.ext.dependencies.stetho.okhttp3Plugin
