@@ -6,6 +6,10 @@ buildscript {
     maven {
       url 'https://oss.sonatype.org/content/repositories/snapshots'
     }
+
+    maven {
+      url 'https://maven.fabric.io/public'
+    }
   }
 
   dependencies {
@@ -26,6 +30,10 @@ allprojects {
 
     maven {
       url 'https://jitpack.io'
+    }
+
+    maven {
+      url 'https://maven.fabric.io/public'
     }
   }
 }
