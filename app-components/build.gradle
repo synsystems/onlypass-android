@@ -67,6 +67,10 @@ dependencies {
   implementation project.ext.dependencies.timber
 
   implementation project.ext.dependencies.logger
+
+  implementation (project.ext.dependencies.crashlytics) {
+    transitive = true
+  }
 }
 
 task deleteOutputDirectories {
