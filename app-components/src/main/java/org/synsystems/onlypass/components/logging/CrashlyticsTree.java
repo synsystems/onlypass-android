@@ -20,7 +20,7 @@ public class CrashlyticsTree extends DebugTree {
   /**
    * Constructs a new CrashlyticsTree that filters no logging calls.
    *
-   * @return the new CrashlyticsTree, not null
+   * @return the new CrashlyticsTree
    */
   @NonNull
   public static CrashlyticsTree withoutMinimumPriority() {
@@ -34,7 +34,7 @@ public class CrashlyticsTree extends DebugTree {
    * @param minimumPriority
    *     the minimum priority to log
    *
-   * @return the new CrashlyticsTree, not null
+   * @return the new CrashlyticsTree
    */
   @NonNull
   public static CrashlyticsTree withMinimumPriority(final int minimumPriority) {
