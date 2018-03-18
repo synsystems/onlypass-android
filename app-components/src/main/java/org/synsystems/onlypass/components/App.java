@@ -54,7 +54,7 @@ public class App extends Application {
   public void onCreate() {
     super.onCreate();
 
-    final Completable ongoingTasks = Completable.merge(ImmutableList.of(manageRemoteLogging()));
+    final Completable ongoingTasks = Completable.merge(ImmutableList.of(handleRemoteLoggingPreferenceChanges()));
 
     ongoingAppTasks = setupDagger()
         .andThen(injectDependencies())
@@ -84,7 +84,7 @@ public class App extends Application {
   @NonNull
   public static App getFromContext(@NonNull final Context context) {
     checkNotNull(context);
-    
+
     return (App) context.getApplicationContext();
   }
 
@@ -131,11 +131,10 @@ public class App extends Application {
             Completable.complete());
   }
 
-  private Completable manageRemoteLogging() {
+  private Completable handleRemoteLoggingPreferenceChanges() {
     final Completable enableRemoteLogging = globalPreferences
         .observeRemoteLoggingEnabled()
-        .take(1) // for safety, ignore subsequent calls
-        .flatMapCompletable(event -> Completable.fromRunnable(() -> {
+        .flatMapCompletable(pulse -> Completable.fromRunnable(() -> {
           Fabric.with(this, crashlytics);
           Timber.plant(crashlyticsTree);
         }));
