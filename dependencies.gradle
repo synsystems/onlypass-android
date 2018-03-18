@@ -97,5 +97,7 @@ ext.dependencies = [
     apacheCommons: [
         lang: 'org.apache.commons:commons-lang3:3.6',
         io: 'commons-io:commons-io:2.6'
-    ]
+    ],
+
+    phoenix: 'com.jakewharton:process-phoenix:2.0.0'
 ]
