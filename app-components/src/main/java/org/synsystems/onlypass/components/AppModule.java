@@ -3,6 +3,8 @@ package org.synsystems.onlypass.components;
 import com.crashlytics.android.Crashlytics;
 import com.google.common.collect.ImmutableMap;
 
+import org.synsystems.onlypass.framework.BuildConfig;
+
 import java.util.Map;
 
 import dagger.Module;
