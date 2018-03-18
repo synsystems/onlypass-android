@@ -16,6 +16,10 @@ public interface AppComponent {
   public interface Builder {
     public Builder setAppModule(AppModule appModule);
 
+    public Builder setLoggingModule(LoggingModule loggingModule);
+
+    public Builder setPreferencesModule(PreferencesModule preferencesModule);
+
     public AppComponent build();
   }
 }
