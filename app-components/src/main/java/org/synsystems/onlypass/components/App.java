@@ -77,11 +77,17 @@ public class App extends Application {
   }
 
   /**
-   * Gets the core app component. Each call returns the same instance.
+   * Gets the core app component. Each call returns the same instance. This method must not be called before
+   * {@link #onCreate()} has completed.
    *
    * @return the core app component
    */
+  @NonNull
   public AppComponent getAppComponent() {
+    if (appComponent == null) {
+      throw new IllegalStateException("App component is not available until onCreate() has completed.");
+    }
+
     return appComponent;
   }
 
