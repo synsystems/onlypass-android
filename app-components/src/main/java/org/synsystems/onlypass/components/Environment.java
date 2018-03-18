@@ -1,5 +1,8 @@
 package org.synsystems.onlypass.components;
 
+/**
+ * The environment that the app is operating in. The environment determines the level of debugging.
+ */
 public enum Environment {
   /**
    * Environment for active development. Local logging and stetho are enabled, but remote logging is disabled by
@@ -40,14 +43,23 @@ public enum Environment {
     this.stethoEnabled = stethoEnabled;
   }
 
+  /**
+   * @return true if local logs are enabled in this environment, false otherwise
+   */
   public boolean isLocalLoggingEnabled() {
     return localLoggingEnabled;
   }
 
+  /**
+   * @return true if remote logging and crash reporting is enabled by default in this environment, false otherwise
+   */
   public boolean isRemoteLoggingEnabledByDefault() {
     return remoteLoggingEnabledByDefault;
   }
 
+  /**
+   * @return true if stetho is enabled in this environment, false otherwise
+   */
   public boolean isStethoEnabled() {
     return stethoEnabled;
   }
