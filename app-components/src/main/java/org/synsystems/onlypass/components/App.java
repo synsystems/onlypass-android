@@ -26,6 +26,10 @@ import timber.log.Timber;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * The core application class. For convenience, activities running under this application can get an instance via
+ * {@link #getFromContext(Context)}.
+ */
 public class App extends Application {
   @Inject
   protected Environment environment;
