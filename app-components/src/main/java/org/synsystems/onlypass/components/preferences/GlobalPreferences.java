@@ -1,11 +1,11 @@
 package org.synsystems.onlypass.components.preferences;
 
-import org.synsystems.onlypass.framework.events.Event;
+import org.synsystems.onlypass.framework.rxutils.Pulse;
 
 import io.reactivex.Observable;
 
 public interface GlobalPreferences {
-  public Observable<Event> observeRemoteLoggingEnabled();
+  public Observable<Pulse> observeRemoteLoggingEnabled();
 
-  public Observable<Event> observeRemoteLoggingDisabled();
+  public Observable<Pulse> observeRemoteLoggingDisabled();
 }

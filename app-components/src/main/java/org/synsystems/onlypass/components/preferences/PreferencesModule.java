@@ -1,7 +1,7 @@
 package org.synsystems.onlypass.components.preferences;
 
 import org.synsystems.onlypass.components.AppScope;
-import org.synsystems.onlypass.framework.events.Event;
+import org.synsystems.onlypass.framework.rxutils.Pulse;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,13 +16,13 @@ public class PreferencesModule {
     // TODO replace with actual implementation
     return new GlobalPreferences() {
       @Override
-      public Observable<Event> observeRemoteLoggingEnabled() {
-        return Observable.never();
+      public Observable<Pulse> observeRemoteLoggingEnabled() {
+        return Observable.empty();
       }
 
       @Override
-      public Observable<Event> observeRemoteLoggingDisabled() {
-        return Observable.never();
+      public Observable<Pulse> observeRemoteLoggingDisabled() {
+        return Observable.empty();
       }
     };
   }
