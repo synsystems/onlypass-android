@@ -8,6 +8,9 @@ import org.joda.time.LocalDateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.synsystems.onlypass.framework.rxutils.Pulse;
+
+import io.reactivex.observers.TestObserver;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
@@ -31,6 +34,72 @@ public class TestSharedPreferencesBackedEvent {
         .edit()
         .clear()
         .apply();
+
+  @Test
+  public void testGetOccurrences_occurrencePreviouslyDeclared() {
+    event
+        .declareOccurredAt(LocalDateTime.now())
+        .test()
+        .awaitDone(200, MILLISECONDS);
+
+    event
+        .observeOccurrences()
+        .test()
+        .awaitDone(200, MILLISECONDS)
+        .assertNoErrors()
+        .assertNoValues()
+        .assertNotComplete();
+  }
+
+  @Test
+  public void testGetOccurrences_noOccurrencesDeclared() {
+    event
+        .observeOccurrences()
+        .test()
+        .awaitDone(200, MILLISECONDS)
+        .assertNoErrors()
+        .assertNoValues()
+        .assertNotComplete();
+  }
+
+  @Test
+  public void testGetOccurrences_occurrenceDeclared() {
+    final LocalDateTime time1 = new LocalDateTime(2018, 2, 16, 12, 0);
+
+    final TestObserver<Pulse> occurrences = event
+        .observeOccurrences()
+        .test();
+
+    event
+        .declareOccurredAt(time1)
+        .test()
+        .awaitDone(200, MILLISECONDS);
+
+    occurrences
+        .assertNoErrors()
+        .assertValues(Pulse.getInstance())
+        .assertNotComplete();
+  }
+
+  @Test
+  public void testGetOccurrences_twoOccurrencesDeclared() {
+    final LocalDateTime time1 = new LocalDateTime(2018, 2, 16, 12, 0);
+    final LocalDateTime time2 = new LocalDateTime(2018, 2, 16, 13, 0);
+
+    final TestObserver<Pulse> occurrences = event
+        .observeOccurrences()
+        .test();
+
+    event
+        .declareOccurredAt(time1)
+        .andThen(event.declareOccurredAt(time2))
+        .test()
+        .awaitDone(200, MILLISECONDS);
+
+    occurrences
+        .assertNoErrors()
+        .assertValues(Pulse.getInstance(), Pulse.getInstance())
+        .assertNotComplete();
   }
 
   @Test
