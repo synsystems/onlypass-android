@@ -26,6 +26,8 @@ android {
     publishNonDefault true
 
     proguardFile 'proguard-rules.pro'
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -50,29 +52,20 @@ android {
 apply from: rootProject.file('dependencies.gradle')
 
 dependencies {
-  implementation project(':framework')
-
-  implementation project.ext.dependencies.dagger.core
-  annotationProcessor project.ext.dependencies.dagger.compiler
-
   api project.ext.dependencies.androidSupport.appCompat
 
   api project.ext.dependencies.rxJava
 
+  api project.ext.dependencies.jodaTime
+
   implementation project.ext.dependencies.guava
 
-  implementation project.ext.dependencies.stetho.core
-  implementation project.ext.dependencies.stetho.okhttp3Plugin
+  androidTestImplementation project.ext.dependencies.junit
 
-  implementation project.ext.dependencies.timber
+  androidTestImplementation project.ext.dependencies.dexmaker.core
+  androidTestImplementation project.ext.dependencies.dexmaker.mockitoPlugin
 
-  implementation project.ext.dependencies.logger
-
-  implementation (project.ext.dependencies.crashlytics) {
-    transitive = true
-  }
-
-  implementation project.ext.dependencies.phoenix
+  androidTestImplementation project.ext.dependencies.androidTestingSupport.espresso.core
 }
 
 task deleteOutputDirectories {
