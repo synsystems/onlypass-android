@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.stetho.Stetho;
 import com.google.common.collect.ImmutableList;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -52,6 +53,7 @@ public class App extends Application {
     ongoingAppTasks = setupDagger()
         .andThen(injectDependencies())
         .andThen(setupLocalLogging())
+        .andThen(setupStetho())
         .andThen(ongoingTasks)
         .subscribe();
   }
@@ -136,5 +138,13 @@ public class App extends Application {
         .flatMapCompletable(event -> Completable.fromRunnable(() -> ProcessPhoenix.triggerRebirth(this)));
 
     return Completable.merge(ImmutableList.of(enableRemoteLogging, disableRemoteLogging));
+  }
+
+  private Completable setupStetho() {
+    return Single
+        .fromCallable(() -> environment.isStethoEnabled())
+        .flatMapCompletable(stethoEnabled -> stethoEnabled ?
+            Completable.fromRunnable(() -> Stetho.initializeWithDefaults(this)) :
+            Completable.complete());
   }
 }
