@@ -125,14 +125,15 @@ public class App extends Application {
         }));
 
     return Single
-        .fromCallable(() -> environment.isLocalLoggingEnabled())
+        .just(environment)
+        .map(Environment::isLocalLoggingEnabled)
         .flatMapCompletable(localLoggingEnabled -> localLoggingEnabled ?
             enableLogging :
             Completable.complete());
   }
 
   private Completable handleRemoteLoggingPreferenceChanges() {
-    final Completable enableRemoteLogging = globalPreferences
+    final Completable handleLoggingEnabled = globalPreferences
         .observeRemoteLoggingEnabled()
         .flatMapCompletable(pulse -> Completable.fromRunnable(() -> {
           Fabric.with(this, crashlytics);
@@ -140,16 +141,17 @@ public class App extends Application {
         }));
 
     // The only way to disable Fabric is to restart the app
-    final Completable disableRemoteLogging = globalPreferences
+    final Completable handleLoggingDisabled = globalPreferences
         .observeRemoteLoggingDisabled()
         .flatMapCompletable(event -> Completable.fromRunnable(() -> ProcessPhoenix.triggerRebirth(this)));
 
-    return Completable.merge(ImmutableList.of(enableRemoteLogging, disableRemoteLogging));
+    return Completable.merge(ImmutableList.of(handleLoggingEnabled, handleLoggingDisabled));
   }
 
   private Completable setupStetho() {
     return Single
-        .fromCallable(() -> environment.isStethoEnabled())
+        .just(environment)
+        .map(Environment::isStethoEnabled)
         .flatMapCompletable(stethoEnabled -> stethoEnabled ?
             Completable.fromRunnable(() -> Stetho.initializeWithDefaults(this)) :
             Completable.complete());
