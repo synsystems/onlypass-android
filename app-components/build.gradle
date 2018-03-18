@@ -71,6 +71,8 @@ dependencies {
   implementation (project.ext.dependencies.crashlytics) {
     transitive = true
   }
+
+  implementation project.ext.dependencies.phoenix
 }
 
 task deleteOutputDirectories {
