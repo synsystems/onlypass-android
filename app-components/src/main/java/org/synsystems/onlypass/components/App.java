@@ -58,7 +58,9 @@ public class App extends Application {
 
   @Override
   public void onTerminate() {
-    ongoingAppTasks.dispose();
+    if (ongoingAppTasks != null) {
+      ongoingAppTasks.dispose();
+    }
 
     super.onTerminate();
   }
