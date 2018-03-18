@@ -8,6 +8,7 @@ import com.google.common.base.Supplier;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
+import org.synsystems.onlypass.framework.rxutils.Pulse;
 
 import java.util.HashSet;
 
@@ -15,10 +16,13 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.subjects.PublishSubject;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class SharedPreferencesBackedEvent implements Event {
+  private final PublishSubject<Pulse> occurrences = PublishSubject.create();
+
   private final SharedPreferences sharedPrefs;
 
   private final String prefKey;
@@ -33,6 +37,12 @@ public class SharedPreferencesBackedEvent implements Event {
     this.sharedPrefs = checkNotNull(sharedPrefs);
     this.prefKey = checkNotNull(prefKey);
     this.nowSupplier = checkNotNull(nowSupplier);
+  }
+
+  @NonNull
+  @Override
+  public Observable<Pulse> observeOccurrences() {
+    return occurrences;
   }
 
   @NonNull
@@ -71,7 +81,8 @@ public class SharedPreferencesBackedEvent implements Event {
         .flatMapCompletable(set -> Completable.fromRunnable(() -> sharedPrefs
             .edit()
             .putStringSet(prefKey, set)
-            .apply()));
+            .apply()))
+        .andThen(Completable.fromRunnable(() -> occurrences.onNext(Pulse.getInstance())));
   }
 
   private Single<String> serialiseLocalDateTime(@NonNull final LocalDateTime date) {
