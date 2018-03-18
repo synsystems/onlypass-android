@@ -1,5 +1,6 @@
 package org.synsystems.onlypass.components;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.Map;
@@ -26,5 +27,11 @@ public class AppModule {
     }
 
     return ENVIRONMENT_MAP.get(BuildConfig.BUILD_TYPE);
+  }
+
+  @Provides
+  @AppScope
+  public Crashlytics provideCrashlytics() {
+    return new Crashlytics();
   }
 }
