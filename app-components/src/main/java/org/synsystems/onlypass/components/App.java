@@ -24,6 +24,8 @@ import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class App extends Application {
   @Inject
   protected Environment environment;
@@ -77,6 +79,8 @@ public class App extends Application {
    */
   @NonNull
   public static App getFromContext(@NonNull final Context context) {
+    checkNotNull(context);
+    
     return (App) context.getApplicationContext();
   }
 
