@@ -1,6 +1,8 @@
 package org.synsystems.onlypass.components;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.common.collect.ImmutableList;
@@ -59,6 +61,19 @@ public class App extends Application {
     ongoingAppTasks.dispose();
 
     super.onTerminate();
+  }
+
+  /**
+   * Convenience method to get the current {@link App} instance from an activity context.
+   *
+   * @param context
+   *     an activity context
+   *
+   * @return the current app instance
+   */
+  @NonNull
+  public static App getFromContext(@NonNull final Context context) {
+    return (App) context.getApplicationContext();
   }
 
   /**
