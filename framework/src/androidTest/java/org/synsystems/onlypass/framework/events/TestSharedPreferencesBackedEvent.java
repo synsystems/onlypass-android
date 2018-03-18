@@ -25,6 +25,11 @@ public class TestSharedPreferencesBackedEvent {
   public void setup() {
     sharedPreferences = InstrumentationRegistry.getContext().getSharedPreferences("test", Context.MODE_PRIVATE);
 
+    sharedPreferences
+        .edit()
+        .clear()
+        .commit();
+
     event = new SharedPreferencesBackedEvent(sharedPreferences, "key", () -> now);
   }
 
@@ -33,7 +38,8 @@ public class TestSharedPreferencesBackedEvent {
     sharedPreferences
         .edit()
         .clear()
-        .apply();
+        .commit();
+  }
 
   @Test
   public void testGetOccurrences_occurrencePreviouslyDeclared() {
