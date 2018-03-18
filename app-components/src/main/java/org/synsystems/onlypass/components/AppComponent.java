@@ -10,6 +10,8 @@ import dagger.Component;
 public interface AppComponent {
   public Environment getEnvironment();
 
+  public void inject(App app);
+
   @Component.Builder
   public interface Builder {
     public Builder setAppModule(AppModule appModule);
