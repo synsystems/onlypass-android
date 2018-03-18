@@ -4,14 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.test.InstrumentationRegistry;
 
-import org.joda.time.LocalDateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.reactivex.observers.TestObserver;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import java.util.concurrent.TimeUnit;
 
 public class TestSharedPreferencesBackedEvent {
   private SharedPreferences sharedPreferences;
@@ -40,147 +37,49 @@ public class TestSharedPreferencesBackedEvent {
   }
 
   @Test
-  public void testGetNewOccurrences_oneOccurrencePreviouslyDeclared() {
+  public void testHasOccurred_occurrenceNeverRecorded() {
     event
-        .declareOccurredAt(LocalDateTime.now())
+        .hasOccurred()
         .test()
-        .awaitDone(200, MILLISECONDS);
-
-    event
-        .observeNewOccurrences()
-        .test()
-        .awaitDone(200, MILLISECONDS)
+        .awaitDone(200, TimeUnit.MILLISECONDS)
         .assertNoErrors()
-        .assertNoValues()
-        .assertNotComplete();
-  }
-
-  @Test
-  public void testGetNewOccurrences_noOccurrencesDeclared() {
-    event
-        .observeNewOccurrences()
-        .test()
-        .awaitDone(200, MILLISECONDS)
-        .assertNoErrors()
-        .assertNoValues()
-        .assertNotComplete();
-  }
-
-  @Test
-  public void testGetNewOccurrences_oneNewOccurrenceDeclared() {
-    final LocalDateTime time = new LocalDateTime(2018, 2, 16, 12, 0);
-
-    final TestObserver<LocalDateTime> occurrences = event
-        .observeNewOccurrences()
-        .test();
-
-    event
-        .declareOccurredAt(time)
-        .test()
-        .awaitDone(200, MILLISECONDS);
-
-    occurrences
-        .assertNoErrors()
-        .assertValues(time)
-        .assertNotComplete();
-  }
-
-  @Test
-  public void testGetNewOccurrences_twoDistinctOccurrencesDeclared() {
-    final LocalDateTime time1 = new LocalDateTime(2018, 2, 16, 12, 0);
-    final LocalDateTime time2 = new LocalDateTime(2018, 2, 16, 13, 0);
-
-    final TestObserver<LocalDateTime> occurrences = event
-        .observeNewOccurrences()
-        .test();
-
-    event
-        .declareOccurredAt(time1)
-        .andThen(event.declareOccurredAt(time2))
-        .test()
-        .awaitDone(200, MILLISECONDS);
-
-    occurrences
-        .assertNoErrors()
-        .assertValues(time1, time2)
-        .assertNotComplete();
-  }
-
-  @Test
-  public void testGetNewOccurrences_twoIdenticalOccurrencesDeclared() {
-    final LocalDateTime time1 = new LocalDateTime(2018, 2, 16, 12, 0);
-    final LocalDateTime time2 = new LocalDateTime(2018, 2, 16, 12, 0);
-
-    final TestObserver<LocalDateTime> occurrences = event
-        .observeNewOccurrences()
-        .test();
-
-    event
-        .declareOccurredAt(time1)
-        .andThen(event.declareOccurredAt(time2))
-        .test()
-        .awaitDone(200, MILLISECONDS);
-
-    occurrences
-        .assertNoErrors()
-        .assertValues(time1)
-        .assertNotComplete();
-  }
-
-  @Test
-  public void testGetPastOccurrences_noOccurrencesHaveBeenDeclared() {
-    event
-        .observePastOccurrences()
-        .test()
-        .awaitDone(200, MILLISECONDS)
-        .assertNoErrors()
-        .assertNoValues()
+        .assertValues(false)
         .assertComplete();
   }
 
   @Test
-  public void testGetPastOccurrences_oneOccurrenceHasBeenDeclared() {
-    final LocalDateTime time = new LocalDateTime(2018, 2, 16, 12, 0);
-
+  public void testHasOccurred_occurrenceRecorded() {
     event
-        .declareOccurredAt(time)
-        .andThen(event.observePastOccurrences())
+        .recordOccurrence()
+        .andThen(event.hasOccurred())
         .test()
-        .awaitDone(200, MILLISECONDS)
+        .awaitDone(200, TimeUnit.MILLISECONDS)
         .assertNoErrors()
-        .assertValue(time)
+        .assertValues(true)
         .assertComplete();
   }
 
   @Test
-  public void testGetPastOccurrences_twoDistinctOccurrencesHaveBeenDeclared() {
-    final LocalDateTime time1 = new LocalDateTime(2018, 2, 16, 12, 0);
-    final LocalDateTime time2 = new LocalDateTime(2018, 2, 16, 13, 0);
-
+  public void testHasOccurred_occurrenceRecordedThenCleared() {
     event
-        .declareOccurredAt(time1)
-        .andThen(event.declareOccurredAt(time2))
-        .andThen(event.observePastOccurrences())
+        .recordOccurrence()
+        .andThen(event.clearRecord())
+        .andThen(event.hasOccurred())
         .test()
-        .awaitDone(200, MILLISECONDS)
+        .awaitDone(200, TimeUnit.MILLISECONDS)
         .assertNoErrors()
-        .assertValues(time1, time2)
+        .assertValues(false)
         .assertComplete();
   }
 
   @Test
-  public void testGetPastOccurrences_twoIdenticalOccurrencesHaveBeenDeclared() {
-    final LocalDateTime time1 = new LocalDateTime(2018, 2, 16, 12, 0);
-    final LocalDateTime time2 = new LocalDateTime(time1);
-
+  public void testClearRecord_occurrenceNeverRecorded() {
     event
-        .declareOccurredAt(time1)
-        .andThen(event.declareOccurredAt(time2))
-        .andThen(event.observePastOccurrences())
+        .clearRecord()
         .test()
-        .awaitDone(200, MILLISECONDS)
+        .awaitDone(200, TimeUnit.MILLISECONDS)
         .assertNoErrors()
-        .assertValues(time1)
+        .assertNoValues()
         .assertComplete();
   }
 }
