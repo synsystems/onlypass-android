@@ -126,7 +126,7 @@ public class App extends Application {
   private Completable manageRemoteLogging() {
     final Completable enableRemoteLogging = globalPreferences
         .observeRemoteLoggingEnabled()
-        .take(1)
+        .take(1) // for safety, ignore subsequent calls
         .flatMapCompletable(event -> Completable.fromRunnable(() -> {
           Fabric.with(this, crashlytics);
           Timber.plant(crashlyticsTree);
