@@ -8,7 +8,7 @@ import com.crashlytics.android.Crashlytics;
 import timber.log.Timber.DebugTree;
 
 /**
- * A Timber tree that forwards logs to Crashlytics. The tree allows filtering based on log priority.
+ * A Timber tree that forwards logging calls to {@link Crashlytics}. The tree provides filtering based on log level.
  */
 public class CrashlyticsTree extends DebugTree {
   private final int minimumPriority;
