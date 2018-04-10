@@ -75,6 +75,11 @@ dependencies {
   implementation project.ext.dependencies.phoenix
   compileOnly project.ext.dependencies.autoValue.annotations
   annotationProcessor project.ext.dependencies.autoValue.compiler
+  testImplementation project.ext.dependencies.junit
+
+  testImplementation project.ext.dependencies.mockito
+
+  testImplementation project.ext.dependencies.hamcrest
 }
 
 task deleteOutputDirectories {
