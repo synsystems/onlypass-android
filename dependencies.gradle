@@ -87,7 +87,9 @@ ext.dependencies = [
         parcelPluginAnnotations: 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.5',
         parcelPluginCompiler: 'com.ryanharter.auto.value:auto-value-parcel:0.2.5',
         ignoreHashEqualsPluginCompiler: 'com.github.reggar:auto-value-ignore-hash-equals:1.1.4',
-        redactedPluginCompiler: 'com.squareup.auto.value:auto-value-redacted:1.0.1'
+        redactedPluginCompiler: 'com.squareup.auto.value:auto-value-redacted:1.0.1',
+        gsonPluginRuntime: 'com.ryanharter.auto.value:auto-value-gson-annotations:0.7.0',
+        gsonPluginCompiler: 'com.ryanharter.auto.value:auto-value-gson:0.7.0'
     ],
 
     guava: 'com.google.guava:guava:20.0-rc1',
