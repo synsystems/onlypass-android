@@ -2,7 +2,6 @@ package org.synsystems.onlypass.components.cryptography.encryption.aes;
 
 import org.synsystems.onlypass.components.AppScope;
 import org.synsystems.onlypass.components.cryptography.credentials.DerivedKey;
-import org.synsystems.onlypass.components.main.data.vault.io.AesConfiguration;
 
 import java.security.NoSuchAlgorithmException;
 

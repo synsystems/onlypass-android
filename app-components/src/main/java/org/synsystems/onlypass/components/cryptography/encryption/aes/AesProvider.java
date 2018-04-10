@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import org.synsystems.onlypass.components.cryptography.credentials.Credential;
 import org.synsystems.onlypass.components.cryptography.encryption.EncryptionError;
-import org.synsystems.onlypass.components.main.data.vault.io.AesConfiguration;
 
 import java.security.NoSuchAlgorithmException;
 
