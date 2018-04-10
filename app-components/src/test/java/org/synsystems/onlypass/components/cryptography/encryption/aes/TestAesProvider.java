@@ -168,6 +168,6 @@ public class TestAesProvider {
         .awaitDone(200, MILLISECONDS)
         .assertNoErrors()
         .assertValue(decryptedData -> Arrays.equals(decryptedData, cleartext))
-        .assertNotComplete();
+        .assertComplete();
   }
 }
