@@ -16,7 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * A {@link CredentialHardener} that converts {@link CleartextPassword}s to {@link DerivedKey}s with
- * the BKDF2WithHmacSHA256 algorithm.
+ * the PBKDF2WithHmacSHA256 algorithm.
  */
 public class PasswordBasedKeyDerivationCredentialHardener implements CredentialHardener<
     CleartextPassword,
