@@ -52,7 +52,7 @@ apply from: rootProject.file('dependencies.gradle')
 dependencies {
   implementation project(':framework')
 
-  implementation project.ext.dependencies.dagger.core
+  implementation project.ext.dependencies.dagger.runtime
   annotationProcessor project.ext.dependencies.dagger.compiler
 
   api project.ext.dependencies.androidSupport.appCompat

@@ -16,7 +16,7 @@ ext.dependencies = [
     rxAndroidBindings: 'com.jakewharton.rxbinding2:rxbinding:2.1.1',
 
     dagger: [
-        core: 'com.google.dagger:dagger:2.9',
+        runtime: 'com.google.dagger:dagger:2.9',
         compiler: 'com.google.dagger:dagger-compiler:2.9',
         mock: 'com.github.fabioCollini:DaggerMock:0.6-beta1'
     ],
@@ -60,7 +60,7 @@ ext.dependencies = [
     crashlytics: 'com.crashlytics.sdk.android:crashlytics:2.9.0@aar',
 
     butterknife: [
-        core: 'com.jakewharton:butterknife:8.6.0',
+        runtime: 'com.jakewharton:butterknife:8.6.0',
         compiler: 'com.jakewharton:butterknife-compiler:8.6.0'
     ],
 
@@ -80,9 +80,9 @@ ext.dependencies = [
     roundedImageView: 'com.makeramen:roundedimageview:2.3.0',
 
     autoValue: [
-        core: 'com.google.auto.value:auto-value:1.4.1',
+        annotations: 'com.google.auto.value:auto-value:1.4.1',
         compiler: 'com.google.auto.value:auto-value:1.4.1',
-        parcelPlugin: 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.5',
+        parcelPluginAnnotations: 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.5',
         parcelPluginCompiler: 'com.ryanharter.auto.value:auto-value-parcel:0.2.5',
         ignoreHashEqualsPluginCompiler: 'com.github.reggar:auto-value-ignore-hash-equals:1.1.4',
         redactedPluginCompiler: 'com.squareup.auto.value:auto-value-redacted:1.0.1'
