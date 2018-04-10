@@ -71,6 +71,8 @@ ext.dependencies = [
 
     jodaTime: 'joda-time:joda-time:2.9.9',
 
+    gson: 'com.google.code.gson:gson:2.8.2',
+
     picasso: 'com.squareup.picasso:picasso:2.5.2',
 
     googlePlayServices: [
