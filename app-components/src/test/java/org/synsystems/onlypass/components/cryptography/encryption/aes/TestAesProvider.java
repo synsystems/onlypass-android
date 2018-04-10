@@ -10,7 +10,6 @@ import org.synsystems.onlypass.components.cryptography.credentials.CleartextPass
 import org.synsystems.onlypass.components.cryptography.credentials.DerivedKey;
 import org.synsystems.onlypass.components.cryptography.encryption.EncryptionError;
 import org.synsystems.onlypass.components.cryptography.encryption.aes.AesProvider.CredentialConverter;
-import org.synsystems.onlypass.components.main.data.vault.io.AesConfiguration;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
