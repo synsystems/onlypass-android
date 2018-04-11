@@ -27,11 +27,11 @@ public enum Environment {
    */
   PROD(false, false, false);
 
-  private boolean localLoggingEnabled;
+  private final boolean localLoggingEnabled;
 
-  private boolean remoteLoggingEnabledByDefault;
+  private final boolean remoteLoggingEnabledByDefault;
 
-  private boolean stethoEnabled;
+  private final boolean stethoEnabled;
 
   Environment(
       final boolean localLoggingEnabled,
