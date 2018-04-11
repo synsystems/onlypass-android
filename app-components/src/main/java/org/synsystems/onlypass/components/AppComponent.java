@@ -1,11 +1,12 @@
 package org.synsystems.onlypass.components;
 
-import org.synsystems.onlypass.components.logging.LoggingModule;
+import org.synsystems.onlypass.components.logging.CrashlyticsTreeModule;
+import org.synsystems.onlypass.components.logging.LoggerTreeModule;
 import org.synsystems.onlypass.components.preferences.PreferencesModule;
 
 import dagger.Component;
 
-@Component(modules = {AppModule.class, LoggingModule.class, PreferencesModule.class})
+@Component(modules = {AppModule.class, CrashlyticsTreeModule.class, LoggerTreeModule.class, PreferencesModule.class})
 @AppScope
 public interface AppComponent {
   public Environment getEnvironment();
