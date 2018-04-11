@@ -8,7 +8,7 @@ import com.google.auto.value.AutoValue;
  * Configuration parameters for password based key derivation.
  */
 @AutoValue
-public abstract class PasswordBasedKeyDerivationConfiguration implements HardeningParameters {
+public abstract class PasswordBasedKeyDerivationConfiguration {
   /**
    * @return the number of iterations to use
    */
