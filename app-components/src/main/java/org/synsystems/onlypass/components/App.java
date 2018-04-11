@@ -48,26 +48,29 @@ public class App extends Application {
 
   private AppComponent appComponent;
 
-  private Disposable ongoingAppTasks;
+  private Disposable applicationTasks;
 
   @Override
   public void onCreate() {
     super.onCreate();
 
-    final Completable ongoingTasks = Completable.merge(ImmutableList.of(handleRemoteLoggingPreferenceChanges()));
+    final Completable initialisationTasks = Completable.concatArray(
+        setupDagger(),
+        injectDependencies(),
+        setupLocalLogging(),
+        setupStetho());
 
-    ongoingAppTasks = setupDagger()
-        .andThen(injectDependencies())
-        .andThen(setupLocalLogging())
-        .andThen(setupStetho())
-        .andThen(ongoingTasks)
+    final Completable persistentTasks = handleRemoteLoggingPreferenceChanges();
+
+    applicationTasks = initialisationTasks
+        .andThen(persistentTasks)
         .subscribe();
   }
 
   @Override
   public void onTerminate() {
-    if (ongoingAppTasks != null) {
-      ongoingAppTasks.dispose();
+    if (applicationTasks != null) {
+      applicationTasks.dispose();
     }
 
     super.onTerminate();
