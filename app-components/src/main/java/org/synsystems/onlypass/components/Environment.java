@@ -44,14 +44,14 @@ public enum Environment {
   }
 
   /**
-   * @return true if local logs are enabled in this environment, false otherwise
+   * @return true if local logging is enabled in this environment, false otherwise
    */
   public boolean isLocalLoggingEnabled() {
     return localLoggingEnabled;
   }
 
   /**
-   * @return true if remote logging and crash reporting is enabled by default in this environment, false otherwise
+   * @return true if remote logging and crash reporting are enabled by default in this environment, false otherwise
    */
   public boolean isRemoteLoggingEnabledByDefault() {
     return remoteLoggingEnabledByDefault;
