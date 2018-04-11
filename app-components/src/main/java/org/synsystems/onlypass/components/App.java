@@ -112,28 +112,27 @@ public class App extends Application {
   }
 
   private Completable setupLocalLogging() {
-    final Completable enableLogging = Single
-        .fromCallable(() -> PrettyFormatStrategy
-            .newBuilder()
-            .methodOffset(5)
-            .tag("OnlyPass")
-            .build())
-        .map(AndroidLogAdapter::new)
-        .flatMapCompletable(logAdapter -> Completable.fromRunnable(() -> {
-          Logger.addLogAdapter(logAdapter);
-          Timber.plant(loggerTree);
-        }));
+    final Completable installLogger = Completable.fromRunnable(() -> {
+      final PrettyFormatStrategy strategy = PrettyFormatStrategy
+          .newBuilder()
+          .methodOffset(5) // Accounts for timber log format
+          .tag("OnlyPass")
+          .build();
+
+      final AndroidLogAdapter adapter = new AndroidLogAdapter(strategy);
+
+      Logger.addLogAdapter(adapter);
+      Timber.plant(loggerTree);
+    });
 
     return Single
         .just(environment)
-        .map(Environment::isLocalLoggingEnabled)
-        .flatMapCompletable(localLoggingEnabled -> localLoggingEnabled ?
-            enableLogging :
-            Completable.complete());
+        .filter(Environment::isLocalLoggingEnabled)
+        .flatMapCompletable(pulse -> installLogger);
   }
 
   private Completable handleRemoteLoggingPreferenceChanges() {
-    final Completable handleLoggingEnabled = globalPreferences
+    final Completable handleRemoteLoggingEnabled = globalPreferences
         .observeRemoteLoggingEnabled()
         .flatMapCompletable(pulse -> Completable.fromRunnable(() -> {
           Fabric.with(this, crashlytics);
@@ -141,11 +140,11 @@ public class App extends Application {
         }));
 
     // The only way to disable Fabric is to restart the app
-    final Completable handleLoggingDisabled = globalPreferences
+    final Completable handleRemoteLoggingDisabled = globalPreferences
         .observeRemoteLoggingDisabled()
-        .flatMapCompletable(event -> Completable.fromRunnable(() -> ProcessPhoenix.triggerRebirth(this)));
+        .flatMapCompletable(pulse -> Completable.fromRunnable(() -> ProcessPhoenix.triggerRebirth(this)));
 
-    return Completable.merge(ImmutableList.of(handleLoggingEnabled, handleLoggingDisabled));
+    return Completable.merge(ImmutableList.of(handleRemoteLoggingEnabled, handleRemoteLoggingDisabled));
   }
 
   private Completable setupStetho() {
