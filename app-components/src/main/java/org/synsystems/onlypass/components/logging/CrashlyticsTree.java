@@ -1,49 +1,53 @@
 package org.synsystems.onlypass.components.logging;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 
 import timber.log.Timber.DebugTree;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * A Timber tree that forwards logging calls to {@link Crashlytics}. The tree provides filtering based on log level.
  */
 public class CrashlyticsTree extends DebugTree {
-  private final int minimumPriority;
+  @NonNull
+  private final LogLevel minimumLevel;
 
-  private CrashlyticsTree(final int minimumPriority) {
-    this.minimumPriority = minimumPriority;
+  private CrashlyticsTree(@NonNull final LogLevel minimumLevel) {
+    this.minimumLevel = minimumLevel;
   }
 
   /**
-   * Constructs a new CrashlyticsTree that filters no logging calls.
+   * Constructs a new CrashlyticsTree that does not filter logging calls.
    *
    * @return the new CrashlyticsTree
    */
   @NonNull
-  public static CrashlyticsTree withoutMinimumPriority() {
-    return new CrashlyticsTree(Integer.MIN_VALUE);
+  public static CrashlyticsTree withoutFiltering() {
+    return new CrashlyticsTree(LogLevel.DEBUG);
   }
 
   /**
-   * Constructs a new CrashlyticsTree that filters out logging calls based on the supplied minimum priority. See
-   * {@link Log} for priority constants.
+   * Constructs a new CrashlyticsTree that filters logging calls based on log level. All logging calls with a priority
+   * below the minimum level are ignored.
    *
-   * @param minimumPriority
-   *     the minimum priority to log
+   * @param minimumLevel
+   *     the minimum log level to accept
    *
    * @return the new CrashlyticsTree
    */
   @NonNull
-  public static CrashlyticsTree withMinimumPriority(final int minimumPriority) {
-    return new CrashlyticsTree(minimumPriority);
+  public static CrashlyticsTree withMinimumLevelFiltering(@NonNull final LogLevel minimumLevel) {
+    checkNotNull(minimumLevel);
+
+    return new CrashlyticsTree(minimumLevel);
   }
 
   @Override
   protected void log(final int priority, final String tag, final String message, final Throwable error) {
-    if (priority < minimumPriority) {
+    if (priority < minimumLevel.getAndroidLogPriority()) {
       return;
     }
 
