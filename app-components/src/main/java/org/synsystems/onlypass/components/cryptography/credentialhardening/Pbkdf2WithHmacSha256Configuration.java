@@ -7,6 +7,7 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -18,17 +19,20 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
    * @return the salt to use in the hash
    */
   @SuppressWarnings("mutable")
+  @SerializedName("salt")
   @NonNull
   public abstract byte[] getSalt();
 
   /**
    * @return the number of iterations to use
    */
+  @SerializedName("iterationCount")
   public abstract int getIterationCount();
 
   /**
    * @return the length of the derived key
    */
+  @SerializedName("derivedKeyBitlength")
   public abstract int getDerivedKeyBitlength();
 
   /**
