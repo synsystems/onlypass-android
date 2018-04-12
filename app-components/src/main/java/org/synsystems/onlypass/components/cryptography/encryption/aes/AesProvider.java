@@ -139,7 +139,7 @@ public class AesProvider<C extends Credential> {
 
     return Single
         .zip(
-            Single.fromCallable(aesConfiguration::getInitialisationVectorBitlength),
+            Single.fromCallable(() -> initialisationVector.getIV().length),
             Single.fromCallable(initialisationVector::getIV),
             GCMParameterSpec::new)
         .flatMapCompletable(gcmSpec -> Completable.fromAction(() -> cipher.init(
