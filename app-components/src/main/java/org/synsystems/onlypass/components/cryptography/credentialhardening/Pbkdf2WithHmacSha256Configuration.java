@@ -10,19 +10,19 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Parameters to configure password based key derivation on a per-derivation basis.
+ * Configuration parameters for PBKDF2WithHmacSHA256.
  */
 @AutoValue
 public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningParameters {
   /**
-   * @return the salt to use to derive the key
+   * @return the salt to use in the hash
    */
   @SuppressWarnings("mutable")
   @NonNull
   public abstract byte[] getSalt();
 
   /**
-   * @return the number of iterations to use to derive the key
+   * @return the number of iterations to use
    */
   public abstract int getIterationCount();
 
@@ -77,10 +77,10 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
   @AutoValue.Builder
   public static abstract class Builder {
     /**
-     * Sets the salt to use to derive the key. The array must not be empty.
+     * Sets the salt to use in the hash. The array must not be empty.
      *
      * @param salt
-     *     the salt to use to derive the key
+     *     the salt to use in the hash
      *
      * @return this Builder
      */
@@ -88,10 +88,10 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
     public abstract Builder setSalt(@NonNull byte[] salt);
 
     /**
-     * Sets the number of iterations to use to derive the key.
+     * Sets the number of iterations to use.
      *
      * @param iterationCount
-     *     the number of iterations to use to derive the key
+     *     the number of iterations to use
      *
      * @return this Builder
      */
@@ -116,7 +116,7 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
      * Creates a new {@link Pbkdf2WithHmacSha256Configuration} based on this builder. Building will fail if any of
      * the values have not been set or were set to invalid values.
      *
-     * @return the new password based key derivation parameters
+     * @return the new Pbkdf2WithHmacSha256Configuration
      */
     @NonNull
     public Pbkdf2WithHmacSha256Configuration build() {
