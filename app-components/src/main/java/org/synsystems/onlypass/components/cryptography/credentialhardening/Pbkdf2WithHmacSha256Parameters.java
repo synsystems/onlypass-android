@@ -1,8 +1,13 @@
 package org.synsystems.onlypass.components.cryptography.credentialhardening;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Parameters to configure password based key derivation on a per-derivation basis.
@@ -41,6 +46,28 @@ public abstract class Pbkdf2WithHmacSha256Parameters implements HardeningParamet
    */
   public static Builder builder() {
     return new AutoValue_Pbkdf2WithHmacSha256Parameters.Builder();
+  }
+
+  @NonNull
+  static TypeAdapter<Pbkdf2WithHmacSha256Parameters> typeAdapter(@NonNull final Gson gson) {
+    return new AutoValue_Pbkdf2WithHmacSha256Parameters.GsonTypeAdapter(gson);
+  }
+
+  /**
+   * @return a new type adapter factory for serialising this class
+   */
+  @NonNull
+  public static TypeAdapterFactory createTypeAdapterFactory() {
+    return new TypeAdapterFactory() {
+      @SuppressWarnings("unchecked")
+      @Nullable
+      @Override
+      public <T> TypeAdapter<T> create(@NonNull final Gson gson, @NonNull final TypeToken<T> type) {
+        return Pbkdf2WithHmacSha256Parameters.class.isAssignableFrom(type.getRawType()) ?
+            (TypeAdapter<T>) Pbkdf2WithHmacSha256Parameters.typeAdapter(gson) :
+            null;
+      }
+    };
   }
 
   /**
