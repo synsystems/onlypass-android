@@ -11,27 +11,16 @@ import static org.mockito.Mockito.mock;
 
 @SuppressWarnings("ConstantConditions")
 public class TestPasswordBasedKeyDerivationCredentialHardener {
-  private static final PasswordBasedKeyDerivationConfiguration CONFIGURATION = PasswordBasedKeyDerivationConfiguration
-      .builder()
-      .setDerivedKeyBitlength(256)
-      .setIterationCount(1000)
-      .build();
-
   private PasswordBasedKeyDerivationCredentialHardener credentialHardener;
 
   @Before
   public void setup() throws NoSuchAlgorithmException {
-    credentialHardener = new PasswordBasedKeyDerivationCredentialHardener(CONFIGURATION);
-  }
-
-  @Test(expected = RuntimeException.class)
-  public void testConstructor_nullConfiguration() throws NoSuchAlgorithmException {
-    new PasswordBasedKeyDerivationCredentialHardener(null);
+    credentialHardener = new PasswordBasedKeyDerivationCredentialHardener();
   }
 
   @Test(expected = RuntimeException.class)
   public void testDeriveSecureCredential_nullInsecureCredential() {
-    credentialHardener.hardenCredential(null, mock(HashingSalt.class));
+    credentialHardener.hardenCredential(null, mock(PasswordBasedKeyDerivationParameters.class));
   }
 
   @Test(expected = RuntimeException.class)
@@ -41,8 +30,15 @@ public class TestPasswordBasedKeyDerivationCredentialHardener {
 
   @Test
   public void testDeriveSecureCredential_allValidValues() {
+    final PasswordBasedKeyDerivationParameters parameters = PasswordBasedKeyDerivationParameters
+        .builder()
+        .setSalt(new byte[]{1})
+        .setDerivedKeyBitlength(256)
+        .setIterationCount(1000)
+        .build();
+
     credentialHardener
-        .hardenCredential(CleartextPassword.create("password"), HashingSalt.create(new byte[]{0, 1, 2, 3}))
+        .hardenCredential(CleartextPassword.create("password"), parameters)
         .test()
         .awaitDone(200, MILLISECONDS)
         .assertNoErrors()
