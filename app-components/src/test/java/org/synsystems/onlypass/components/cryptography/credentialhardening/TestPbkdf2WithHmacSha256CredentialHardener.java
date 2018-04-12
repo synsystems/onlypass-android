@@ -10,17 +10,17 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.mockito.Mockito.mock;
 
 @SuppressWarnings("ConstantConditions")
-public class TestPasswordBasedKeyDerivationCredentialHardener {
-  private PasswordBasedKeyDerivationCredentialHardener credentialHardener;
+public class TestPbkdf2WithHmacSha256CredentialHardener {
+  private Pbkdf2WithHmacSha256CredentialHardener credentialHardener;
 
   @Before
   public void setup() throws NoSuchAlgorithmException {
-    credentialHardener = new PasswordBasedKeyDerivationCredentialHardener();
+    credentialHardener = new Pbkdf2WithHmacSha256CredentialHardener();
   }
 
   @Test(expected = RuntimeException.class)
   public void testDeriveSecureCredential_nullInsecureCredential() {
-    credentialHardener.hardenCredential(null, mock(PasswordBasedKeyDerivationParameters.class));
+    credentialHardener.hardenCredential(null, mock(Pbkdf2WithHmacSha256Parameters.class));
   }
 
   @Test(expected = RuntimeException.class)
@@ -30,7 +30,7 @@ public class TestPasswordBasedKeyDerivationCredentialHardener {
 
   @Test
   public void testDeriveSecureCredential_allValidValues() {
-    final PasswordBasedKeyDerivationParameters parameters = PasswordBasedKeyDerivationParameters
+    final Pbkdf2WithHmacSha256Parameters parameters = Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setDerivedKeyBitlength(256)

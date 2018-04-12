@@ -7,10 +7,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SuppressWarnings("ConstantConditions")
-public class TestPasswordBasedKeyDerivationParameters {
+public class TestPbkdf2WithHmacSha256Parameters {
   @Test(expected = RuntimeException.class)
   public void testBuild_saltNotSet() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setIterationCount(1)
         .setDerivedKeyBitlength(8)
@@ -19,7 +19,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_emptySaltSet() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[0])
         .setIterationCount(1)
@@ -29,7 +29,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_nullSalt() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(null)
         .setIterationCount(1)
@@ -39,7 +39,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_iterationCountNotSet() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setDerivedKeyBitlength(8)
@@ -48,7 +48,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_iterationCountLessThan1() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(0)
@@ -58,7 +58,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test
   public void testBuild_iterationCountEqualTo1() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -68,7 +68,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_derivedKeyBitlengthNotSet() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -77,7 +77,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_derivedKeyBitlengthLessThan8() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -87,7 +87,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test
   public void testBuild_derivedKeyBitlengthEqualTo8() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -97,7 +97,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_derivedKeyBitlengthNotAMultipleOf8() {
-    PasswordBasedKeyDerivationParameters
+    Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -107,7 +107,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test
   public void testBuild_allValidValues() {
-    final PasswordBasedKeyDerivationParameters parameters = PasswordBasedKeyDerivationParameters
+    final Pbkdf2WithHmacSha256Parameters parameters = Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -121,7 +121,7 @@ public class TestPasswordBasedKeyDerivationParameters {
 
   @Test
   public void testToBuilderThenBuild() {
-    final PasswordBasedKeyDerivationParameters parameters = PasswordBasedKeyDerivationParameters
+    final Pbkdf2WithHmacSha256Parameters parameters = Pbkdf2WithHmacSha256Parameters
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
