@@ -18,21 +18,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * A {@link CredentialHardener} that converts {@link CleartextPassword}s to {@link DerivedKey}s with
  * the PBKDF2WithHmacSHA256 algorithm.
  */
-public class PasswordBasedKeyDerivationCredentialHardener implements CredentialHardener<
+public class Pbkdf2WithHmacSha256CredentialHardener implements CredentialHardener<
     CleartextPassword,
     DerivedKey,
-    PasswordBasedKeyDerivationParameters> {
+    Pbkdf2WithHmacSha256Parameters> {
 
   @NonNull
   private final SecretKeyFactory secretKeyFactory;
 
   /**
-   * Constructs a new PasswordBasedKeyDerivationCredentialHardener.
+   * Constructs a new Pbkdf2WithHmacSha256CredentialHardener.
    *
    * @throws NoSuchAlgorithmException
    *     if the PBKDF2WithHmacSHA256 algorithm is not available at runtime
    */
-  public PasswordBasedKeyDerivationCredentialHardener() throws NoSuchAlgorithmException {
+  public Pbkdf2WithHmacSha256CredentialHardener() throws NoSuchAlgorithmException {
     // A hard dependency is ok in this case since we need a specific instance
     secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
   }
@@ -41,7 +41,7 @@ public class PasswordBasedKeyDerivationCredentialHardener implements CredentialH
   @Override
   public Single<DerivedKey> hardenCredential(
       @NonNull final CleartextPassword insecureCredential,
-      @NonNull final PasswordBasedKeyDerivationParameters parameters) {
+      @NonNull final Pbkdf2WithHmacSha256Parameters parameters) {
 
     checkNotNull(insecureCredential);
     checkNotNull(parameters);

@@ -8,7 +8,7 @@ import com.google.auto.value.AutoValue;
  * Parameters to configure password based key derivation on a per-derivation basis.
  */
 @AutoValue
-public abstract class PasswordBasedKeyDerivationParameters implements HardeningParameters {
+public abstract class Pbkdf2WithHmacSha256Parameters implements HardeningParameters {
   /**
    * @return the salt to use to derive the key
    */
@@ -27,7 +27,7 @@ public abstract class PasswordBasedKeyDerivationParameters implements HardeningP
   public abstract int getDerivedKeyBitlength();
 
   /**
-   * @return a new {@link Builder} with values copied from this PasswordBasedKeyDerivationParameters
+   * @return a new {@link Builder} with values copied from this Pbkdf2WithHmacSha256Parameters
    */
   public Builder toBuilder() {
     return builder()
@@ -40,11 +40,11 @@ public abstract class PasswordBasedKeyDerivationParameters implements HardeningP
    * @return a new {@link Builder} with empty values
    */
   public static Builder builder() {
-    return new AutoValue_PasswordBasedKeyDerivationParameters.Builder();
+    return new AutoValue_Pbkdf2WithHmacSha256Parameters.Builder();
   }
 
   /**
-   * Builds new {@link PasswordBasedKeyDerivationParameters} instances.
+   * Builds new {@link Pbkdf2WithHmacSha256Parameters} instances.
    */
   @SuppressWarnings("NullableProblems")
   @AutoValue.Builder
@@ -83,17 +83,17 @@ public abstract class PasswordBasedKeyDerivationParameters implements HardeningP
     public abstract Builder setDerivedKeyBitlength(int derivedKeyLength);
 
     @NonNull
-    abstract PasswordBasedKeyDerivationParameters autoBuild();
+    abstract Pbkdf2WithHmacSha256Parameters autoBuild();
 
     /**
-     * Creates a new {@link PasswordBasedKeyDerivationParameters} based on this builder. Building will fail if any of
+     * Creates a new {@link Pbkdf2WithHmacSha256Parameters} based on this builder. Building will fail if any of
      * the values have not been set or were set to invalid values.
      *
      * @return the new password based key derivation parameters
      */
     @NonNull
-    public PasswordBasedKeyDerivationParameters build() {
-      final PasswordBasedKeyDerivationParameters parameters = autoBuild();
+    public Pbkdf2WithHmacSha256Parameters build() {
+      final Pbkdf2WithHmacSha256Parameters parameters = autoBuild();
 
       if (parameters.getSalt().length == 0) {
         throw new IllegalStateException("Salt cannot be empty.");
