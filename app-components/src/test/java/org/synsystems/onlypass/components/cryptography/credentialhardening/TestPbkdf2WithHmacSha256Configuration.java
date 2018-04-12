@@ -7,10 +7,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SuppressWarnings("ConstantConditions")
-public class TestPbkdf2WithHmacSha256Parameters {
+public class TestPbkdf2WithHmacSha256Configuration {
   @Test(expected = RuntimeException.class)
   public void testBuild_saltNotSet() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setIterationCount(1)
         .setDerivedKeyBitlength(8)
@@ -19,7 +19,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_emptySaltSet() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[0])
         .setIterationCount(1)
@@ -29,7 +29,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_nullSalt() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(null)
         .setIterationCount(1)
@@ -39,7 +39,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_iterationCountNotSet() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setDerivedKeyBitlength(8)
@@ -48,7 +48,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_iterationCountLessThan1() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(0)
@@ -58,7 +58,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test
   public void testBuild_iterationCountEqualTo1() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -68,7 +68,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_derivedKeyBitlengthNotSet() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -77,7 +77,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_derivedKeyBitlengthLessThan8() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -87,7 +87,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test
   public void testBuild_derivedKeyBitlengthEqualTo8() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -97,7 +97,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test(expected = RuntimeException.class)
   public void testBuild_derivedKeyBitlengthNotAMultipleOf8() {
-    Pbkdf2WithHmacSha256Parameters
+    Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -107,7 +107,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test
   public void testBuild_allValidValues() {
-    final Pbkdf2WithHmacSha256Parameters parameters = Pbkdf2WithHmacSha256Parameters
+    final Pbkdf2WithHmacSha256Configuration parameters = Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)
@@ -121,7 +121,7 @@ public class TestPbkdf2WithHmacSha256Parameters {
 
   @Test
   public void testToBuilderThenBuild() {
-    final Pbkdf2WithHmacSha256Parameters parameters = Pbkdf2WithHmacSha256Parameters
+    final Pbkdf2WithHmacSha256Configuration parameters = Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setIterationCount(1)

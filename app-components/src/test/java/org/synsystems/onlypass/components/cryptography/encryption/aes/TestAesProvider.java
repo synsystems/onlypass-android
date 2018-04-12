@@ -3,8 +3,8 @@ package org.synsystems.onlypass.components.cryptography.encryption.aes;
 import org.junit.Before;
 import org.junit.Test;
 import org.synsystems.onlypass.components.cryptography.credentialhardening.CredentialHardener;
+import org.synsystems.onlypass.components.cryptography.credentialhardening.Pbkdf2WithHmacSha256Configuration;
 import org.synsystems.onlypass.components.cryptography.credentialhardening.Pbkdf2WithHmacSha256CredentialHardener;
-import org.synsystems.onlypass.components.cryptography.credentialhardening.Pbkdf2WithHmacSha256Parameters;
 import org.synsystems.onlypass.components.cryptography.credentials.CleartextPassword;
 import org.synsystems.onlypass.components.cryptography.credentials.DerivedKey;
 import org.synsystems.onlypass.components.cryptography.encryption.EncryptionError;
@@ -38,10 +38,10 @@ public class TestAesProvider {
     iv1 = new byte[128];
     iv2 = new byte[96];
 
-    final CredentialHardener<CleartextPassword, DerivedKey, Pbkdf2WithHmacSha256Parameters> credentialHardener =
+    final CredentialHardener<CleartextPassword, DerivedKey, Pbkdf2WithHmacSha256Configuration> credentialHardener =
         new Pbkdf2WithHmacSha256CredentialHardener();
 
-    final Pbkdf2WithHmacSha256Parameters hardeningParameters = Pbkdf2WithHmacSha256Parameters
+    final Pbkdf2WithHmacSha256Configuration hardeningParameters = Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setDerivedKeyBitlength(256)

@@ -21,7 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class Pbkdf2WithHmacSha256CredentialHardener implements CredentialHardener<
     CleartextPassword,
     DerivedKey,
-    Pbkdf2WithHmacSha256Parameters> {
+    Pbkdf2WithHmacSha256Configuration> {
 
   @NonNull
   private final SecretKeyFactory secretKeyFactory;
@@ -41,7 +41,7 @@ public class Pbkdf2WithHmacSha256CredentialHardener implements CredentialHardene
   @Override
   public Single<DerivedKey> hardenCredential(
       @NonNull final CleartextPassword insecureCredential,
-      @NonNull final Pbkdf2WithHmacSha256Parameters parameters) {
+      @NonNull final Pbkdf2WithHmacSha256Configuration parameters) {
 
     checkNotNull(insecureCredential);
     checkNotNull(parameters);

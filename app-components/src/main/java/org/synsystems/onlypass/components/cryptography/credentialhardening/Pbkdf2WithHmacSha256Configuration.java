@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
  * Parameters to configure password based key derivation on a per-derivation basis.
  */
 @AutoValue
-public abstract class Pbkdf2WithHmacSha256Parameters implements HardeningParameters {
+public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningParameters {
   /**
    * @return the salt to use to derive the key
    */
@@ -32,7 +32,7 @@ public abstract class Pbkdf2WithHmacSha256Parameters implements HardeningParamet
   public abstract int getDerivedKeyBitlength();
 
   /**
-   * @return a new {@link Builder} with values copied from this Pbkdf2WithHmacSha256Parameters
+   * @return a new {@link Builder} with values copied from this Pbkdf2WithHmacSha256Configuration
    */
   public Builder toBuilder() {
     return builder()
@@ -45,12 +45,12 @@ public abstract class Pbkdf2WithHmacSha256Parameters implements HardeningParamet
    * @return a new {@link Builder} with empty values
    */
   public static Builder builder() {
-    return new AutoValue_Pbkdf2WithHmacSha256Parameters.Builder();
+    return new AutoValue_Pbkdf2WithHmacSha256Configuration.Builder();
   }
 
   @NonNull
-  static TypeAdapter<Pbkdf2WithHmacSha256Parameters> typeAdapter(@NonNull final Gson gson) {
-    return new AutoValue_Pbkdf2WithHmacSha256Parameters.GsonTypeAdapter(gson);
+  static TypeAdapter<Pbkdf2WithHmacSha256Configuration> typeAdapter(@NonNull final Gson gson) {
+    return new AutoValue_Pbkdf2WithHmacSha256Configuration.GsonTypeAdapter(gson);
   }
 
   /**
@@ -63,15 +63,15 @@ public abstract class Pbkdf2WithHmacSha256Parameters implements HardeningParamet
       @Nullable
       @Override
       public <T> TypeAdapter<T> create(@NonNull final Gson gson, @NonNull final TypeToken<T> type) {
-        return Pbkdf2WithHmacSha256Parameters.class.isAssignableFrom(type.getRawType()) ?
-            (TypeAdapter<T>) Pbkdf2WithHmacSha256Parameters.typeAdapter(gson) :
+        return Pbkdf2WithHmacSha256Configuration.class.isAssignableFrom(type.getRawType()) ?
+            (TypeAdapter<T>) Pbkdf2WithHmacSha256Configuration.typeAdapter(gson) :
             null;
       }
     };
   }
 
   /**
-   * Builds new {@link Pbkdf2WithHmacSha256Parameters} instances.
+   * Builds new {@link Pbkdf2WithHmacSha256Configuration} instances.
    */
   @SuppressWarnings("NullableProblems")
   @AutoValue.Builder
@@ -110,17 +110,17 @@ public abstract class Pbkdf2WithHmacSha256Parameters implements HardeningParamet
     public abstract Builder setDerivedKeyBitlength(int derivedKeyLength);
 
     @NonNull
-    abstract Pbkdf2WithHmacSha256Parameters autoBuild();
+    abstract Pbkdf2WithHmacSha256Configuration autoBuild();
 
     /**
-     * Creates a new {@link Pbkdf2WithHmacSha256Parameters} based on this builder. Building will fail if any of
+     * Creates a new {@link Pbkdf2WithHmacSha256Configuration} based on this builder. Building will fail if any of
      * the values have not been set or were set to invalid values.
      *
      * @return the new password based key derivation parameters
      */
     @NonNull
-    public Pbkdf2WithHmacSha256Parameters build() {
-      final Pbkdf2WithHmacSha256Parameters parameters = autoBuild();
+    public Pbkdf2WithHmacSha256Configuration build() {
+      final Pbkdf2WithHmacSha256Configuration parameters = autoBuild();
 
       if (parameters.getSalt().length == 0) {
         throw new IllegalStateException("Salt cannot be empty.");

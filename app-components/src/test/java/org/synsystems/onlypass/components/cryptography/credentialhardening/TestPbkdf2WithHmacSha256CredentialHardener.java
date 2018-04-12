@@ -20,7 +20,7 @@ public class TestPbkdf2WithHmacSha256CredentialHardener {
 
   @Test(expected = RuntimeException.class)
   public void testDeriveSecureCredential_nullInsecureCredential() {
-    credentialHardener.hardenCredential(null, mock(Pbkdf2WithHmacSha256Parameters.class));
+    credentialHardener.hardenCredential(null, mock(Pbkdf2WithHmacSha256Configuration.class));
   }
 
   @Test(expected = RuntimeException.class)
@@ -30,7 +30,7 @@ public class TestPbkdf2WithHmacSha256CredentialHardener {
 
   @Test
   public void testDeriveSecureCredential_allValidValues() {
-    final Pbkdf2WithHmacSha256Parameters parameters = Pbkdf2WithHmacSha256Parameters
+    final Pbkdf2WithHmacSha256Configuration parameters = Pbkdf2WithHmacSha256Configuration
         .builder()
         .setSalt(new byte[]{1})
         .setDerivedKeyBitlength(256)
