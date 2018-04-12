@@ -12,11 +12,9 @@ import dagger.Provides;
 public class PasswordBasedKeyDerivationCredentialHardenerModule {
   @Provides
   @AppScope
-  public PasswordBasedKeyDerivationCredentialHardener providePasswordBasedKeyDerivationCredentialHardener(
-      final PasswordBasedKeyDerivationConfiguration parameters) {
-
+  public PasswordBasedKeyDerivationCredentialHardener providePasswordBasedKeyDerivationCredentialHardener() {
     try {
-      return new PasswordBasedKeyDerivationCredentialHardener(parameters);
+      return new PasswordBasedKeyDerivationCredentialHardener();
     } catch (final NoSuchAlgorithmException e) {
       throw new RuntimeException("Unable to provide PasswordBasedKeyDerivationCredentialHardener.", e);
     }

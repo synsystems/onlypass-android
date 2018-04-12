@@ -21,10 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class PasswordBasedKeyDerivationCredentialHardener implements CredentialHardener<
     CleartextPassword,
     DerivedKey,
-    HashingSalt> {
-
-  @NonNull
-  private final PasswordBasedKeyDerivationConfiguration parameters;
+    PasswordBasedKeyDerivationParameters> {
 
   @NonNull
   private final SecretKeyFactory secretKeyFactory;
@@ -32,18 +29,10 @@ public class PasswordBasedKeyDerivationCredentialHardener implements CredentialH
   /**
    * Constructs a new PasswordBasedKeyDerivationCredentialHardener.
    *
-   * @param configuration
-   *     the configuration to use throughout all hardening operations
-   *
    * @throws NoSuchAlgorithmException
    *     if the PBKDF2WithHmacSHA256 algorithm is not available at runtime
    */
-  public PasswordBasedKeyDerivationCredentialHardener(
-      @NonNull final PasswordBasedKeyDerivationConfiguration configuration)
-      throws NoSuchAlgorithmException {
-
-    this.parameters = checkNotNull(configuration);
-
+  public PasswordBasedKeyDerivationCredentialHardener() throws NoSuchAlgorithmException {
     // A hard dependency is ok in this case since we need a specific instance
     secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
   }
@@ -52,10 +41,10 @@ public class PasswordBasedKeyDerivationCredentialHardener implements CredentialH
   @Override
   public Single<DerivedKey> hardenCredential(
       @NonNull final CleartextPassword insecureCredential,
-      @NonNull final HashingSalt hashingSalt) {
+      @NonNull final PasswordBasedKeyDerivationParameters parameters) {
 
     checkNotNull(insecureCredential);
-    checkNotNull(hashingSalt);
+    checkNotNull(parameters);
 
     return Single
         .just(insecureCredential)
@@ -63,7 +52,7 @@ public class PasswordBasedKeyDerivationCredentialHardener implements CredentialH
         .map(String::toCharArray)
         .map(passwordChars -> new PBEKeySpec(
             passwordChars,
-            hashingSalt.getSalt(),
+            parameters.getSalt(),
             parameters.getIterationCount(),
             parameters.getDerivedKeyBitlength()))
         .map(secretKeyFactory::generateSecret)
