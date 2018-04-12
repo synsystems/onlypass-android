@@ -15,12 +15,9 @@ import dagger.Provides;
 public class AesProviderModule {
   @Provides
   @AppScope
-  public AesProvider<DerivedKey> provideAesProvider(
-      final AesConfiguration configuration,
-      final DerivedKeyCredentialConverter derivedKeyCredentialConverter) {
-
+  public AesProvider<DerivedKey> provideAesProvider(final DerivedKeyCredentialConverter derivedKeyCredentialConverter) {
     try {
-      return new AesProvider<>(configuration, derivedKeyCredentialConverter);
+      return new AesProvider<>(derivedKeyCredentialConverter);
     } catch (final NoSuchAlgorithmException | NoSuchPaddingException e) {
       throw new RuntimeException("Unable to provide AesProvider.", e);
     }

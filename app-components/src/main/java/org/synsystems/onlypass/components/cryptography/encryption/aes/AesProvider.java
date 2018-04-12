@@ -27,9 +27,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class AesProvider<C extends Credential> {
   @NonNull
-  private final AesConfiguration aesConfiguration;
-
-  @NonNull
   private final CredentialConverter<C> credentialConverter;
 
   @NonNull
@@ -38,8 +35,6 @@ public class AesProvider<C extends Credential> {
   /**
    * Constructs a new AesProvider.
    *
-   * @param aesConfiguration
-   *     the configuration to use throughout all encryption and decryption operations
    * @param credentialConverter
    *     converts credentials to {@link SecretKeySpec}s
    *
@@ -49,11 +44,9 @@ public class AesProvider<C extends Credential> {
    *     if PKCS5Padding is not available at runtime
    */
   public AesProvider(
-      @NonNull final AesConfiguration aesConfiguration,
       @NonNull final CredentialConverter<C> credentialConverter)
       throws NoSuchAlgorithmException, NoSuchPaddingException {
 
-    this.aesConfiguration = checkNotNull(aesConfiguration);
     this.credentialConverter = checkNotNull(credentialConverter);
 
     // A hard dependency is ok in this case since we need a specific instance for AES
