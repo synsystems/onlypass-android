@@ -23,9 +23,8 @@ public interface CredentialHardener<
     P extends HardeningParameters> {
 
   /**
-   * Hardens an insecure credential thereby producing a secure credential. Given the same credential hardener state,
-   * insecure credential and hardening parameters, every call must be deterministic and reproducible. That is to say,
-   * the method is idempotent for any given set of inputs.
+   * Hardens an insecure credential thereby producing a secure credential. Each call with the same arguments must
+   * produce the same result.
    *
    * @param insecureCredential
    *     the credential to harden

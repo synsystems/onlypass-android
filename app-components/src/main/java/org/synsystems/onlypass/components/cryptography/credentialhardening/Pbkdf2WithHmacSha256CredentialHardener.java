@@ -30,7 +30,7 @@ public class Pbkdf2WithHmacSha256CredentialHardener implements CredentialHardene
    * Constructs a new Pbkdf2WithHmacSha256CredentialHardener.
    *
    * @throws NoSuchAlgorithmException
-   *     if the PBKDF2WithHmacSHA256 algorithm is not available at runtime
+   *     if PBKDF2WithHmacSHA256 is not available at runtime
    */
   public Pbkdf2WithHmacSha256CredentialHardener() throws NoSuchAlgorithmException {
     // A hard dependency is ok in this case since we need a specific instance

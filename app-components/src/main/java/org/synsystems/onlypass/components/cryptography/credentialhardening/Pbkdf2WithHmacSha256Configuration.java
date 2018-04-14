@@ -16,7 +16,7 @@ import com.google.gson.reflect.TypeToken;
 @AutoValue
 public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningParameters {
   /**
-   * @return the salt to use in the hash
+   * @return the salt to apply to the hash
    */
   @SuppressWarnings("mutable")
   @SerializedName("salt")
@@ -30,13 +30,13 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
   public abstract int getIterationCount();
 
   /**
-   * @return the length of the derived key
+   * @return the length of the derived key, measured in number of bits
    */
   @SerializedName("derivedKeyBitlength")
   public abstract int getDerivedKeyBitlength();
 
   /**
-   * @return a new {@link Builder} with values copied from this Pbkdf2WithHmacSha256Configuration
+   * @return a new {@link Builder} with values copied from this configuration
    */
   public Builder toBuilder() {
     return builder()
@@ -81,10 +81,10 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
   @AutoValue.Builder
   public static abstract class Builder {
     /**
-     * Sets the salt to use in the hash. The array must not be empty.
+     * Sets the salt to apply to the hash. The array must not be empty.
      *
      * @param salt
-     *     the salt to use in the hash
+     *     the salt to apply to the hash
      *
      * @return this Builder
      */
@@ -106,7 +106,7 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
      * Sets the length of the derived key.
      *
      * @param derivedKeyLength
-     *     the length of the derived key
+     *     the length of the derived key, measured in number of bits
      *
      * @return this Builder
      */
@@ -120,7 +120,7 @@ public abstract class Pbkdf2WithHmacSha256Configuration implements HardeningPara
      * Creates a new {@link Pbkdf2WithHmacSha256Configuration} based on this builder. Building will fail if any of
      * the values have not been set or were set to invalid values.
      *
-     * @return the new Pbkdf2WithHmacSha256Configuration
+     * @return the new configuration
      */
     @NonNull
     public Pbkdf2WithHmacSha256Configuration build() {
