@@ -10,7 +10,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Generates secure random byte arrays. The generated arrays are secure enough for use in cryptographic operations.
+ * Generates secure random byte arrays. The generated arrays are random enough for use in cryptographic operations.
  */
 public class SecureByteArrayGenerator {
   @NonNull
@@ -27,8 +27,8 @@ public class SecureByteArrayGenerator {
   }
 
   /**
-   * Generates a byte array with random contents. The contents are sufficiently random such that they can be used in
-   * cryptographic operations.
+   * Generates a byte array with secure random contents. The contents are random enough for use in cryptographic
+   * operations.
    *
    * @param lengthBytes
    *     the length of the generated array
