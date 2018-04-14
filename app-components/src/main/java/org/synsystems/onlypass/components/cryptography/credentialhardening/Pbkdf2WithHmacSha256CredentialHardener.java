@@ -47,8 +47,7 @@ public class Pbkdf2WithHmacSha256CredentialHardener implements CredentialHardene
     checkNotNull(parameters);
 
     return Single
-        .just(insecureCredential)
-        .map(CleartextPassword::getPassword)
+        .fromCallable(insecureCredential::getPassword)
         .map(String::toCharArray)
         .map(passwordChars -> new PBEKeySpec(
             passwordChars,
