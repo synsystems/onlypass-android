@@ -17,7 +17,9 @@ public class TestSharedPreferencesBackedEvent {
 
   @Before
   public void setup() {
-    sharedPreferences = InstrumentationRegistry.getContext().getSharedPreferences("test", Context.MODE_PRIVATE);
+    sharedPreferences = InstrumentationRegistry
+        .getContext()
+        .getSharedPreferences("test", Context.MODE_PRIVATE);
 
     // In case tear down failed
     sharedPreferences
