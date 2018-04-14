@@ -39,7 +39,7 @@ public class AesProvider<C extends Credential> {
    *     converts credentials to {@link SecretKeySpec}s
    *
    * @throws NoSuchAlgorithmException
-   *     if the AES-GCM algorithm is not available at runtime
+   *     if the AES-GCM is not available at runtime
    * @throws NoSuchPaddingException
    *     if PKCS5Padding is not available at runtime
    */
@@ -57,7 +57,7 @@ public class AesProvider<C extends Credential> {
    * Encrypts cleartext with AES.
    *
    * @param cleartext
-   *     the data to encrypt
+   *     the cleartext to encrypt
    * @param initialisationVector
    *     the initialisation vector to use
    * @param credential
@@ -93,11 +93,11 @@ public class AesProvider<C extends Credential> {
    * match those used in the original encryption process.
    *
    * @param ciphertext
-   *     the encrypted data to decrypt
+   *     the ciphertext to decrypt
    * @param initialisationVector
    *     the initialisation vector to use
    * @param credential
-   *     the credential the data is encrypted with
+   *     the credential to decrypt the data with
    *
    * @return a new single that emits the decrypted cleartext
    */
@@ -155,13 +155,12 @@ public class AesProvider<C extends Credential> {
    * Converts {@link Credential}s to {@link SecretKeySpec}s.
    *
    * @param <C>
-   *     the type of credentials that can be converted
+   *     the type of credential that can be converted
    */
   public interface CredentialConverter<C extends Credential> {
     /**
-     * Converts the supplied credential to a secret key spec. The secret key spec is configured for AES. Calls are
-     * idempotent. Given the same credential converter state and credential, every call must be deterministic and
-     * reproducible. That is to say, the method is idempotent for any given set of inputs.
+     * Converts the supplied credential to a secret key spec that is configured for AES. Each call with the same 
+     * arguments must produce the same result.
      *
      * @param credential
      *     the credential to convert

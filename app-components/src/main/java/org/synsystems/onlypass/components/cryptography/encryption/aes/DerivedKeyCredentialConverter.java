@@ -13,7 +13,7 @@ import io.reactivex.Single;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * A {@link CredentialConverter} that operates on {@link DerivedKey}s.
+ * A {@link CredentialConverter} for {@link DerivedKey}s.
  */
 public class DerivedKeyCredentialConverter implements CredentialConverter<DerivedKey> {
   @NonNull
