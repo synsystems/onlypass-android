@@ -90,7 +90,7 @@ public class AesProvider<C extends Credential> {
 
   /**
    * Decrypts ciphertext with AES. The operation will fail if the initialisation vector or the credential do not
-   * match those used in the original encryption process.
+   * match during encryption.
    *
    * @param ciphertext
    *     the ciphertext to decrypt
@@ -159,7 +159,7 @@ public class AesProvider<C extends Credential> {
    */
   public interface CredentialConverter<C extends Credential> {
     /**
-     * Converts the supplied credential to a secret key spec that is configured for AES. Each call with the same 
+     * Converts the supplied credential to a secret key spec that is configured for AES. Each call with the same
      * arguments must produce the same result.
      *
      * @param credential
