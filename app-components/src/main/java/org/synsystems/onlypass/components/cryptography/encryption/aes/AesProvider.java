@@ -79,8 +79,7 @@ public class AesProvider<C extends Credential> {
         .zip(
             credentialConverter.toSecretKeySpec(credential),
             Single.fromCallable(() -> new IvParameterSpec(initialisationVector)),
-            Single.just(Cipher.ENCRYPT_MODE),
-            this::prepareCipher)
+            this::prepareCipherForEncryption)
         .flatMapCompletable(wrappedCompletable -> wrappedCompletable);
 
     return prepareForEncryption
@@ -115,8 +114,7 @@ public class AesProvider<C extends Credential> {
         .zip(
             credentialConverter.toSecretKeySpec(credential),
             Single.fromCallable(() -> new IvParameterSpec(initialisationVector)),
-            Single.just(Cipher.DECRYPT_MODE),
-            this::prepareCipher)
+            this::prepareCipherForDecryption)
         .flatMapCompletable(wrappedCompletable -> wrappedCompletable);
 
     return prepareForDecryption
@@ -125,10 +123,9 @@ public class AesProvider<C extends Credential> {
   }
 
   @NonNull
-  private Completable prepareCipher(
+  private Completable prepareCipherForEncryption(
       @NonNull final SecretKey key,
-      @NonNull final IvParameterSpec initialisationVector,
-      final int cipherMode) {
+      @NonNull final IvParameterSpec initialisationVector) {
 
     return Single
         .zip(
@@ -136,7 +133,23 @@ public class AesProvider<C extends Credential> {
             Single.fromCallable(initialisationVector::getIV),
             GCMParameterSpec::new)
         .flatMapCompletable(gcmSpec -> Completable.fromAction(() -> cipher.init(
-            cipherMode,
+            Cipher.ENCRYPT_MODE,
+            key,
+            gcmSpec)));
+  }
+
+  @NonNull
+  private Completable prepareCipherForDecryption(
+      @NonNull final SecretKey key,
+      @NonNull final IvParameterSpec initialisationVector) {
+
+    return Single
+        .zip(
+            Single.fromCallable(() -> initialisationVector.getIV().length),
+            Single.fromCallable(initialisationVector::getIV),
+            GCMParameterSpec::new)
+        .flatMapCompletable(gcmSpec -> Completable.fromAction(() -> cipher.init(
+            Cipher.DECRYPT_MODE,
             key,
             gcmSpec)));
   }
