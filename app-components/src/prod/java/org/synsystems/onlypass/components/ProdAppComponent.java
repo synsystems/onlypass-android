@@ -7,7 +7,7 @@ import org.synsystems.onlypass.components.cryptography.random.SecureByteArrayGen
 import org.synsystems.onlypass.components.cryptography.random.SecureRandomModule;
 import org.synsystems.onlypass.components.logging.CrashlyticsTreeModule;
 import org.synsystems.onlypass.components.logging.LoggerTreeModule;
-import org.synsystems.onlypass.components.preferences.PreferencesModule;
+import org.synsystems.onlypass.components.preferences.GlobalPreferencesModule;
 
 import dagger.Component;
 
@@ -15,7 +15,7 @@ import dagger.Component;
     CrashlyticsTreeModule.class,
     LoggerTreeModule.class,
     CrashlyticsModule.class,
-    PreferencesModule.class,
+    GlobalPreferencesModule.class,
     Pbkdf2WithHmacSha256CredentialHardenerModule.class,
     AesProviderModule.class,
     DerivedKeyCredentialConverterModule.class,
