@@ -9,25 +9,11 @@ import org.synsystems.onlypass.components.logging.CrashlyticsTreeModule;
 import org.synsystems.onlypass.components.logging.LoggerTreeModule;
 import org.synsystems.onlypass.components.preferences.PreferencesModule;
 
-import dagger.Component;
-
-@Component(modules = {
-    CrashlyticsTreeModule.class,
-    LoggerTreeModule.class,
-    CrashlyticsModule.class,
-    PreferencesModule.class,
-    Pbkdf2WithHmacSha256CredentialHardenerModule.class,
-    AesProviderModule.class,
-    DerivedKeyCredentialConverterModule.class,
-    SecureByteArrayGeneratorModule.class,
-    SecureRandomModule.class})
-@AppScope
 public interface AppComponent {
   public Environment getEnvironment();
 
   public void inject(App app);
 
-  @Component.Builder
   public interface Builder {
     public Builder setCrashlyticsTreeModule(CrashlyticsTreeModule module);
 
@@ -37,7 +23,7 @@ public interface AppComponent {
 
     public Builder setPreferencesModule(PreferencesModule module);
 
-    public Builder setPasswordBasedKeyDerivationCredentialHardenerModule(Pbkdf2WithHmacSha256CredentialHardenerModule module);
+    public Builder setPbkdf2WithHmacSha256CredentialHardenerModule(Pbkdf2WithHmacSha256CredentialHardenerModule module);
 
     public Builder setAesProviderModule(AesProviderModule module);
 
@@ -46,7 +32,5 @@ public interface AppComponent {
     public Builder setSecureByteArrayGeneratorModule(SecureByteArrayGeneratorModule module);
 
     public Builder setSecureRandomModule(SecureRandomModule module);
-
-    public AppComponent build();
   }
 }

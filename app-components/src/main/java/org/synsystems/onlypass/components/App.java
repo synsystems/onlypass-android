@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * The core application class. For convenience, activities running under this application can get an instance via
  * {@link #getFromContext(Context)}.
  */
-public class App extends Application {
+public abstract class App extends Application {
   @Inject
   protected Environment environment;
 
@@ -49,6 +49,8 @@ public class App extends Application {
   private AppComponent appComponent;
 
   private Disposable applicationTasks;
+
+  protected abstract AppComponent createAppComponent();
 
   @Override
   public void onCreate() {
@@ -107,7 +109,7 @@ public class App extends Application {
   }
 
   private Completable setupDagger() {
-    return Completable.fromRunnable(() -> appComponent = DaggerAppComponent.create());
+    return Completable.fromRunnable(() -> appComponent = createAppComponent());
   }
 
   private Completable injectDependencies() {

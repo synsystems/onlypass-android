@@ -1,0 +1,9 @@
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:node="merge">
+
+  <application
+      android:name="org.synsystems.onlypass.components.InternalTestingApp"
+      tools:node="merge"/>
+</manifest>
