@@ -1,12 +1,12 @@
 package org.synsystems.onlypass.components;
 
-import org.synsystems.onlypass.components.logging.CrashlyticsTreeModule;
-import org.synsystems.onlypass.components.logging.LoggerTreeModule;
 import org.synsystems.onlypass.components.cryptography.credentialhardening.Pbkdf2WithHmacSha256CredentialHardenerModule;
 import org.synsystems.onlypass.components.cryptography.encryption.aes.AesProviderModule;
 import org.synsystems.onlypass.components.cryptography.encryption.aes.DerivedKeyCredentialConverterModule;
 import org.synsystems.onlypass.components.cryptography.random.SecureByteArrayGeneratorModule;
 import org.synsystems.onlypass.components.cryptography.random.SecureRandomModule;
+import org.synsystems.onlypass.components.logging.CrashlyticsTreeModule;
+import org.synsystems.onlypass.components.logging.LoggerTreeModule;
 import org.synsystems.onlypass.components.preferences.PreferencesModule;
 
 import dagger.Component;
