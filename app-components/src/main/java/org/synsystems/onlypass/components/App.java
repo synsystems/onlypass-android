@@ -79,21 +79,6 @@ public abstract class App extends Application {
   }
 
   /**
-   * Convenience method to get the current {@link App} instance from an activity context.
-   *
-   * @param context
-   *     an activity context
-   *
-   * @return the current app instance
-   */
-  @NonNull
-  public static App getFromContext(@NonNull final Context context) {
-    checkNotNull(context);
-
-    return (App) context.getApplicationContext();
-  }
-
-  /**
    * Gets the core app component. Each call returns the same instance. This method must not be called before
    * {@link #onCreate()} has completed.
    *
