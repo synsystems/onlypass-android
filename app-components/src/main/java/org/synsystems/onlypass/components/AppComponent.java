@@ -6,7 +6,11 @@ import org.synsystems.onlypass.components.preferences.PreferencesModule;
 
 import dagger.Component;
 
-@Component(modules = {AppModule.class, CrashlyticsTreeModule.class, LoggerTreeModule.class, PreferencesModule.class})
+@Component(modules = {
+    CrashlyticsTreeModule.class,
+    LoggerTreeModule.class,
+    CrashlyticsModule.class,
+    PreferencesModule.class})
 @AppScope
 public interface AppComponent {
   public Environment getEnvironment();
@@ -15,11 +19,13 @@ public interface AppComponent {
 
   @Component.Builder
   public interface Builder {
-    public Builder setAppModule(AppModule appModule);
+    public Builder setCrashlyticsTreeModule(CrashlyticsTreeModule module);
 
-    public Builder setLoggingModule(LoggingModule loggingModule);
+    public Builder setLoggerTreeModule(LoggerTreeModule module);
 
-    public Builder setPreferencesModule(PreferencesModule preferencesModule);
+    public Builder setCrashlyticsModule(CrashlyticsModule module);
+
+    public Builder setPreferencesModule(PreferencesModule module);
 
     public AppComponent build();
   }
