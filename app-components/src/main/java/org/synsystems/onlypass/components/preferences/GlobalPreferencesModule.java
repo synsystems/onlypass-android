@@ -9,7 +9,7 @@ import io.reactivex.Observable;
 
 @Module
 @AppScope
-public class PreferencesModule {
+public class GlobalPreferencesModule {
   @Provides
   @AppScope
   public GlobalPreferences provideGlobalPreferences() {

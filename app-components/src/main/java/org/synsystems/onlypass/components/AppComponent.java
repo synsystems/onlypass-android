@@ -7,7 +7,7 @@ import org.synsystems.onlypass.components.cryptography.random.SecureByteArrayGen
 import org.synsystems.onlypass.components.cryptography.random.SecureRandomModule;
 import org.synsystems.onlypass.components.logging.CrashlyticsTreeModule;
 import org.synsystems.onlypass.components.logging.LoggerTreeModule;
-import org.synsystems.onlypass.components.preferences.PreferencesModule;
+import org.synsystems.onlypass.components.preferences.GlobalPreferencesModule;
 
 public interface AppComponent {
   public Environment getEnvironment();
@@ -21,7 +21,7 @@ public interface AppComponent {
 
     public Builder setCrashlyticsModule(CrashlyticsModule module);
 
-    public Builder setPreferencesModule(PreferencesModule module);
+    public Builder setPreferencesModule(GlobalPreferencesModule module);
 
     public Builder setPbkdf2WithHmacSha256CredentialHardenerModule(Pbkdf2WithHmacSha256CredentialHardenerModule module);
 
