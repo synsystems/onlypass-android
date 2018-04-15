@@ -52,7 +52,7 @@ apply from: rootProject.file('dependencies.gradle')
 dependencies {
   implementation project(':framework')
 
-  implementation project.ext.dependencies.dagger.core
+  implementation project.ext.dependencies.dagger.runtime
   annotationProcessor project.ext.dependencies.dagger.compiler
 
   api project.ext.dependencies.androidSupport.appCompat
@@ -73,6 +73,18 @@ dependencies {
   }
 
   implementation project.ext.dependencies.phoenix
+  compileOnly project.ext.dependencies.autoValue.annotations
+  implementation project.ext.dependencies.autoValue.gsonPluginRuntime
+  annotationProcessor project.ext.dependencies.autoValue.compiler
+  annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
+
+  implementation project.ext.dependencies.gson
+
+  testImplementation project.ext.dependencies.junit
+
+  testImplementation project.ext.dependencies.mockito
+
+  testImplementation project.ext.dependencies.hamcrest
 }
 
 task deleteOutputDirectories {
