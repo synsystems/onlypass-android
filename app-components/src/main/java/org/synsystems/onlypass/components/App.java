@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
-import com.google.common.collect.ImmutableList;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -25,12 +24,13 @@ import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.TRUE;
 
 /**
  * The core application class. For convenience, activities running under this application can get an instance via
  * {@link #getFromContext(Context)}.
  */
-public class App extends Application {
+public abstract class App extends Application {
   @Inject
   protected Environment environment;
 
@@ -48,44 +48,34 @@ public class App extends Application {
 
   private AppComponent appComponent;
 
-  private Disposable ongoingAppTasks;
+  private Disposable applicationTasks;
+
+  protected abstract AppComponent createAppComponent();
 
   @Override
   public void onCreate() {
     super.onCreate();
 
-    final Completable ongoingTasks = Completable.merge(ImmutableList.of(handleRemoteLoggingPreferenceChanges()));
+    final Completable setupApplication = Completable.concatArray(
+        setupDagger(),
+        injectDependencies(),
+        setupLocalLogging(),
+        setupStetho());
 
-    ongoingAppTasks = setupDagger()
-        .andThen(injectDependencies())
-        .andThen(setupLocalLogging())
-        .andThen(setupStetho())
-        .andThen(ongoingTasks)
+    final Completable handleOngoingEvents = handleRemoteLoggingPreferenceChanges();
+
+    applicationTasks = setupApplication
+        .andThen(handleOngoingEvents)
         .subscribe();
   }
 
   @Override
   public void onTerminate() {
-    if (ongoingAppTasks != null) {
-      ongoingAppTasks.dispose();
+    if (applicationTasks != null) {
+      applicationTasks.dispose();
     }
 
     super.onTerminate();
-  }
-
-  /**
-   * Convenience method to get the current {@link App} instance from an activity context.
-   *
-   * @param context
-   *     an activity context
-   *
-   * @return the current app instance
-   */
-  @NonNull
-  public static App getFromContext(@NonNull final Context context) {
-    checkNotNull(context);
-
-    return (App) context.getApplicationContext();
   }
 
   /**
@@ -104,7 +94,7 @@ public class App extends Application {
   }
 
   private Completable setupDagger() {
-    return Completable.fromRunnable(() -> appComponent = DaggerAppComponent.create());
+    return Completable.fromRunnable(() -> appComponent = createAppComponent());
   }
 
   private Completable injectDependencies() {
@@ -112,28 +102,27 @@ public class App extends Application {
   }
 
   private Completable setupLocalLogging() {
-    final Completable enableLogging = Single
-        .fromCallable(() -> PrettyFormatStrategy
-            .newBuilder()
-            .methodOffset(5)
-            .tag("OnlyPass")
-            .build())
-        .map(AndroidLogAdapter::new)
-        .flatMapCompletable(logAdapter -> Completable.fromRunnable(() -> {
-          Logger.addLogAdapter(logAdapter);
-          Timber.plant(loggerTree);
-        }));
+    final Completable installLogger = Completable.fromRunnable(() -> {
+      final PrettyFormatStrategy strategy = PrettyFormatStrategy
+          .newBuilder()
+          .methodOffset(5) // Accounts for timber log format
+          .tag("OnlyPass")
+          .build();
+
+      final AndroidLogAdapter adapter = new AndroidLogAdapter(strategy);
+
+      Logger.addLogAdapter(adapter);
+      Timber.plant(loggerTree);
+    });
 
     return Single
-        .just(environment)
-        .map(Environment::isLocalLoggingEnabled)
-        .flatMapCompletable(localLoggingEnabled -> localLoggingEnabled ?
-            enableLogging :
-            Completable.complete());
+        .fromCallable(environment::isLocalLoggingEnabled)
+        .filter(TRUE::equals)
+        .flatMapCompletable(pulse -> installLogger);
   }
 
   private Completable handleRemoteLoggingPreferenceChanges() {
-    final Completable handleLoggingEnabled = globalPreferences
+    final Completable handleRemoteLoggingEnabled = globalPreferences
         .observeRemoteLoggingEnabled()
         .flatMapCompletable(pulse -> Completable.fromRunnable(() -> {
           Fabric.with(this, crashlytics);
@@ -141,11 +130,11 @@ public class App extends Application {
         }));
 
     // The only way to disable Fabric is to restart the app
-    final Completable handleLoggingDisabled = globalPreferences
+    final Completable handleRemoteLoggingDisabled = globalPreferences
         .observeRemoteLoggingDisabled()
-        .flatMapCompletable(event -> Completable.fromRunnable(() -> ProcessPhoenix.triggerRebirth(this)));
+        .flatMapCompletable(pulse -> Completable.fromRunnable(() -> ProcessPhoenix.triggerRebirth(this)));
 
-    return Completable.merge(ImmutableList.of(handleLoggingEnabled, handleLoggingDisabled));
+    return Completable.mergeArray(handleRemoteLoggingEnabled, handleRemoteLoggingDisabled);
   }
 
   private Completable setupStetho() {

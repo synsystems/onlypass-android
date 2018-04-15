@@ -5,36 +5,25 @@ import org.synsystems.onlypass.components.cryptography.encryption.aes.AesProvide
 import org.synsystems.onlypass.components.cryptography.encryption.aes.DerivedKeyCredentialConverterModule;
 import org.synsystems.onlypass.components.cryptography.random.SecureByteArrayGeneratorModule;
 import org.synsystems.onlypass.components.cryptography.random.SecureRandomModule;
-import org.synsystems.onlypass.components.logging.LoggingModule;
-import org.synsystems.onlypass.components.preferences.PreferencesModule;
+import org.synsystems.onlypass.components.logging.CrashlyticsTreeModule;
+import org.synsystems.onlypass.components.logging.LoggerTreeModule;
+import org.synsystems.onlypass.components.preferences.GlobalPreferencesModule;
 
-import dagger.Component;
-
-@Component(modules = {
-    AppModule.class,
-    LoggingModule.class,
-    PreferencesModule.class,
-    Pbkdf2WithHmacSha256CredentialHardenerModule.class,
-    AesProviderModule.class,
-    DerivedKeyCredentialConverterModule.class,
-    SecureByteArrayGeneratorModule.class,
-    SecureRandomModule.class})
-@AppScope
 public interface AppComponent {
   public Environment getEnvironment();
 
   public void inject(App app);
 
-  @Component.Builder
   public interface Builder {
-    public Builder setAppModule(AppModule module);
+    public Builder setCrashlyticsTreeModule(CrashlyticsTreeModule module);
 
-    public Builder setLoggingModule(LoggingModule module);
+    public Builder setLoggerTreeModule(LoggerTreeModule module);
 
-    public Builder setPreferencesModule(PreferencesModule module);
+    public Builder setCrashlyticsModule(CrashlyticsModule module);
 
-    public Builder setPasswordBasedKeyDerivationCredentialHardenerModule(
-        Pbkdf2WithHmacSha256CredentialHardenerModule module);
+    public Builder setPreferencesModule(GlobalPreferencesModule module);
+
+    public Builder setPbkdf2WithHmacSha256CredentialHardenerModule(Pbkdf2WithHmacSha256CredentialHardenerModule module);
 
     public Builder setAesProviderModule(AesProviderModule module);
 
@@ -43,7 +32,5 @@ public interface AppComponent {
     public Builder setSecureByteArrayGeneratorModule(SecureByteArrayGeneratorModule module);
 
     public Builder setSecureRandomModule(SecureRandomModule module);
-
-    public AppComponent build();
   }
 }
