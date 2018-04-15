@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
-import com.google.common.collect.ImmutableList;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -25,6 +24,7 @@ import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.TRUE;
 
 /**
  * The core application class. For convenience, activities running under this application can get an instance via
@@ -56,16 +56,16 @@ public abstract class App extends Application {
   public void onCreate() {
     super.onCreate();
 
-    final Completable initialisationTasks = Completable.concatArray(
+    final Completable setupApplication = Completable.concatArray(
         setupDagger(),
         injectDependencies(),
         setupLocalLogging(),
         setupStetho());
 
-    final Completable persistentTasks = handleRemoteLoggingPreferenceChanges();
+    final Completable handleOngoingEvents = handleRemoteLoggingPreferenceChanges();
 
-    applicationTasks = initialisationTasks
-        .andThen(persistentTasks)
+    applicationTasks = setupApplication
+        .andThen(handleOngoingEvents)
         .subscribe();
   }
 
@@ -131,8 +131,8 @@ public abstract class App extends Application {
     });
 
     return Single
-        .just(environment)
-        .filter(Environment::isLocalLoggingEnabled)
+        .fromCallable(environment::isLocalLoggingEnabled)
+        .filter(TRUE::equals)
         .flatMapCompletable(pulse -> installLogger);
   }
 
@@ -149,7 +149,7 @@ public abstract class App extends Application {
         .observeRemoteLoggingDisabled()
         .flatMapCompletable(pulse -> Completable.fromRunnable(() -> ProcessPhoenix.triggerRebirth(this)));
 
-    return Completable.merge(ImmutableList.of(handleRemoteLoggingEnabled, handleRemoteLoggingDisabled));
+    return Completable.mergeArray(handleRemoteLoggingEnabled, handleRemoteLoggingDisabled);
   }
 
   private Completable setupStetho() {
