@@ -56,6 +56,10 @@ ext.sdkVersionInformation = [
     compileSdkVersion: 27
 ]
 
+ext.miscVersionInformation = [
+    androidBuildTools: '27.0.3'
+]
+
 task deleteAllOutputDirectories(dependsOn: [
     ':app-assembly:deleteOutputDirectories',
     ':app-components:deleteOutputDirectories',
