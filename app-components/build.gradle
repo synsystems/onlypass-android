@@ -23,8 +23,6 @@ android {
 
     multiDexEnabled true
 
-    publishNonDefault true
-
     proguardFile 'proguard-rules.pro'
   }
 
