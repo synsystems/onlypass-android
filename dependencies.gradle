@@ -53,7 +53,7 @@ ext.dependencies = [
         okhttp3Plugin: 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     ],
 
-    timber: 'com.jakewharton.timber:timber:4.3.1',
+    timber: 'com.jakewharton.timber:timber:4.7.0',
 
     logger: 'com.orhanobut:logger:2.1.1',
 
