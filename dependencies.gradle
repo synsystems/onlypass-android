@@ -27,13 +27,13 @@ ext.dependencies = [
     ],
 
     androidSupport: [
-        annotations: 'com.android.support:support-annotations:27.0.2',
-        appCompat: 'com.android.support:appcompat-v7:27.0.2',
-        cardView: 'com.android.support:cardview-v7:27.0.2',
-        design: 'com.android.support:design:27.0.2',
-        percent: 'com.android.support:percent:27.0.2',
-        vectorDrawable: 'com.android.support:support-vector-drawable:27.0.2',
-        animatedVectorDrawable: 'com.android.support:animated-vector-drawable:27.0.2',
+        annotations: 'com.android.support:support-annotations:27.1.0',
+        appCompat: 'com.android.support:appcompat-v7:27.1.0',
+        cardView: 'com.android.support:cardview-v7:27.1.0',
+        design: 'com.android.support:design:27.1.0',
+        percent: 'com.android.support:percent:27.1.0',
+        vectorDrawable: 'com.android.support:support-vector-drawable:27.1.0',
+        animatedVectorDrawable: 'com.android.support:animated-vector-drawable:27.1.0',
         multidex: 'com.android.support:multidex:1.0.2'
     ],
 
