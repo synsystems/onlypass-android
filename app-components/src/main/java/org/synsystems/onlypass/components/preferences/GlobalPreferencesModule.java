@@ -8,7 +8,6 @@ import dagger.Provides;
 import io.reactivex.Observable;
 
 @Module
-@AppScope
 public class GlobalPreferencesModule {
   @Provides
   @AppScope
