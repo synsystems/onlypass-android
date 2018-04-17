@@ -16,14 +16,12 @@ android {
     minSdkVersion rootProject.ext.sdkVersionInformation.minSdkVersion
     targetSdkVersion rootProject.ext.sdkVersionInformation.targetSdkVersion
 
-    buildToolsVersion '27.0.3'
+    buildToolsVersion rootProject.ext.miscVersionInformation.androidBuildTools
 
     versionCode rootProject.ext.appVersionInformation.versionCode
     versionName ''
 
     multiDexEnabled true
-
-    publishNonDefault true
 
     proguardFile 'proguard-rules.pro'
   }
@@ -73,6 +71,7 @@ dependencies {
   }
 
   implementation project.ext.dependencies.phoenix
+  
   compileOnly project.ext.dependencies.autoValue.annotations
   implementation project.ext.dependencies.autoValue.gsonPluginRuntime
   annotationProcessor project.ext.dependencies.autoValue.compiler

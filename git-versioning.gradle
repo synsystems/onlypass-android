@@ -5,7 +5,7 @@ ext.describeGitStatus = { ->
     grgit.open()
 
     try {
-      return grgit.head().getAbbreviatedId(16) + '-' + (grgit.status().isClean() ? 'unmodified' : 'modified')
+      return grgit.head().getAbbreviatedId(16)
 
     } catch (final Exception e) {
       throw new RuntimeException('Error describing git status.', e)

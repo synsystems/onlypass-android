@@ -8,7 +8,6 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-@AppScope
 public class Pbkdf2WithHmacSha256CredentialHardenerModule {
   @Provides
   @AppScope

@@ -20,7 +20,8 @@ buildscript {
 }
 
 plugins {
-  id 'org.ajoberstar.grgit' version '2.1.0'
+  id 'org.ajoberstar.grgit' version '2.1.0' apply true
+  id "com.github.ben-manes.versions" version '0.17.0' apply true
 }
 
 allprojects {
@@ -54,6 +55,10 @@ ext.sdkVersionInformation = [
     minSdkVersion: 19,
     targetSdkVersion: 27,
     compileSdkVersion: 27
+]
+
+ext.miscVersionInformation = [
+    androidBuildTools: '27.0.3'
 ]
 
 task deleteAllOutputDirectories(dependsOn: [

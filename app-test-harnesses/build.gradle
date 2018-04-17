@@ -15,7 +15,7 @@ android {
     minSdkVersion rootProject.ext.sdkVersionInformation.minSdkVersion
     targetSdkVersion rootProject.ext.sdkVersionInformation.targetSdkVersion
 
-    buildToolsVersion '27.0.3'
+    buildToolsVersion rootProject.ext.miscVersionInformation.androidBuildTools
 
     versionCode rootProject.ext.appVersionInformation.versionCode
     versionName ''
