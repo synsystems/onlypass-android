@@ -16,8 +16,8 @@ ext.dependencies = [
     rxAndroidBindings: 'com.jakewharton.rxbinding2:rxbinding:2.1.1',
 
     dagger: [
-        runtime: 'com.google.dagger:dagger:2.9',
-        compiler: 'com.google.dagger:dagger-compiler:2.9',
+        runtime: 'com.google.dagger:dagger:2.15',
+        compiler: 'com.google.dagger:dagger-compiler:2.15',
         mock: 'com.github.fabioCollini:DaggerMock:0.6-beta1'
     ],
 
