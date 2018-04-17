@@ -42,9 +42,9 @@ ext.dependencies = [
         rules: 'com.android.support.test:rules:0.5',
 
         espresso: [
-            core: 'com.android.support.test.espresso:espresso-core:2.2.2',
-            contrib: 'com.android.support.test.espresso:espresso-contrib:2.2.2',
-            intents: 'com.android.support.test.espresso:espresso-intents:2.2.2'
+            core: 'com.android.support.test.espresso:espresso-core:3.0.1',
+            contrib: 'com.android.support.test.espresso:espresso-contrib:3.0.1',
+            intents: 'com.android.support.test.espresso:espresso-intents:3.0.1'
         ]
     ],
 
