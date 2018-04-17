@@ -71,6 +71,7 @@ dependencies {
   }
 
   implementation project.ext.dependencies.phoenix
+  
   compileOnly project.ext.dependencies.autoValue.annotations
   implementation project.ext.dependencies.autoValue.gsonPluginRuntime
   annotationProcessor project.ext.dependencies.autoValue.compiler
