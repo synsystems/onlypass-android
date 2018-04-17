@@ -4,7 +4,6 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-@AppScope
 public class EnvironmentModule {
   @Provides
   @AppScope
