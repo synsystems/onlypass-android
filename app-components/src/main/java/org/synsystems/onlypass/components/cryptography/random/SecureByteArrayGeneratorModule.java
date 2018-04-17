@@ -8,7 +8,6 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-@AppScope
 public class SecureByteArrayGeneratorModule {
   @Provides
   @AppScope
