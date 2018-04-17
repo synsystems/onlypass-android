@@ -20,7 +20,8 @@ buildscript {
 }
 
 plugins {
-  id 'org.ajoberstar.grgit' version '2.1.0'
+  id 'org.ajoberstar.grgit' version '2.1.0' apply true
+  id "com.github.ben-manes.versions" version '0.17.0' apply true
 }
 
 allprojects {
