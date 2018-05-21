@@ -62,6 +62,10 @@ dependencies {
 
   implementation project.ext.dependencies.apacheCommons.io
 
+  api (project.ext.dependencies.materialSearchView) {
+    exclude group: 'com.android.support'
+  }
+
   androidTestImplementation project.ext.dependencies.junit
 
   androidTestImplementation project.ext.dependencies.dexmaker.core
