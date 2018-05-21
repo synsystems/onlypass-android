@@ -60,6 +60,8 @@ dependencies {
 
   implementation project.ext.dependencies.guava
 
+  implementation project.ext.dependencies.apacheCommons.io
+
   androidTestImplementation project.ext.dependencies.junit
 
   androidTestImplementation project.ext.dependencies.dexmaker.core
