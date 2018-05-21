@@ -56,6 +56,8 @@ dependencies {
 
   api project.ext.dependencies.jodaTime
 
+  api project.ext.dependencies.gson
+
   implementation project.ext.dependencies.guava
 
   androidTestImplementation project.ext.dependencies.junit
