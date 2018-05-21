@@ -71,6 +71,10 @@ dependencies {
   annotationProcessor project.ext.dependencies.autoValue.compiler
   annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
 
+  testImplementation project.ext.dependencies.junit
+
+  testImplementation project.ext.dependencies.mockito
+
   androidTestImplementation project.ext.dependencies.junit
 
   androidTestImplementation project.ext.dependencies.dexmaker.core
