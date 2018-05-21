@@ -66,6 +66,11 @@ dependencies {
     exclude group: 'com.android.support'
   }
 
+  compileOnly project.ext.dependencies.autoValue.annotations
+  implementation project.ext.dependencies.autoValue.gsonPluginRuntime
+  annotationProcessor project.ext.dependencies.autoValue.compiler
+  annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
+
   androidTestImplementation project.ext.dependencies.junit
 
   androidTestImplementation project.ext.dependencies.dexmaker.core
