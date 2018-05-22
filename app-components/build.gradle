@@ -55,6 +55,7 @@ dependencies {
   annotationProcessor project.ext.dependencies.dagger.compiler
 
   api project.ext.dependencies.androidSupport.appCompat
+  api project.ext.dependencies.androidSupport.design
 
   api project.ext.dependencies.rxJava
 
