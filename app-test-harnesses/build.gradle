@@ -105,6 +105,8 @@ dependencies {
   implementation project.ext.dependencies.androidSupport.annotations
 
   implementation project.ext.dependencies.androidTestingTools
+
+  implementation project.ext.dependencies.guava
 }
 
 task deleteOutputDirectories {
