@@ -81,6 +81,8 @@ dependencies {
 
   implementation project.ext.dependencies.gson
 
+  implementation project.ext.dependencies.androidUtilities
+
   testImplementation project.ext.dependencies.junit
 
   testImplementation project.ext.dependencies.mockito
