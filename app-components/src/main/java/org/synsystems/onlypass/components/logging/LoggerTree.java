@@ -46,7 +46,7 @@ public class LoggerTree extends DebugTree {
   }
 
   @Override
-  protected void log(final int priority, final String tag, final String message, final Throwable error) {
+  protected void log(final int priority, final String tag, @NonNull final String message, final Throwable error) {
     if (priority < minimumLevel.getAndroidLogPriority()) {
       return;
     }
