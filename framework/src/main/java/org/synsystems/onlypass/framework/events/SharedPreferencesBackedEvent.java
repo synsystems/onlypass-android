@@ -14,25 +14,25 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class SharedPreferencesBackedEvent implements Event {
   private final SharedPreferences sharedPrefs;
 
-  private final String prefKey;
+  private final String key;
 
   /**
    * Constructs a new SharedPreferencesBackedEvent.
    *
    * @param sharedPrefs
    *     the preferences to store the record in
-   * @param prefKey
    *     the key to store the record with
+   * @param key
    */
-  public SharedPreferencesBackedEvent(@NonNull final SharedPreferences sharedPrefs, @NonNull final String prefKey) {
+  public SharedPreferencesBackedEvent(@NonNull final SharedPreferences sharedPrefs, @NonNull final String key) {
     this.sharedPrefs = checkNotNull(sharedPrefs);
-    this.prefKey = checkNotNull(prefKey);
+    this.key = checkNotNull(key);
   }
 
   @NonNull
   @Override
   public Single<Boolean> hasOccurred() {
-    return Single.fromCallable(() -> sharedPrefs.getBoolean(prefKey, false));
+    return Single.fromCallable(() -> sharedPrefs.getBoolean(key, false));
   }
 
   @NonNull
@@ -40,7 +40,7 @@ public class SharedPreferencesBackedEvent implements Event {
   public Completable recordOccurrence() {
     return Completable.fromRunnable(() -> sharedPrefs
         .edit()
-        .putBoolean(prefKey, true)
+        .putBoolean(key, true)
         .apply());
   }
 
@@ -49,7 +49,7 @@ public class SharedPreferencesBackedEvent implements Event {
   public Completable clearRecord() {
     return Completable.fromRunnable(() -> sharedPrefs
         .edit()
-        .remove(prefKey)
+        .remove(key)
         .apply());
   }
 }
