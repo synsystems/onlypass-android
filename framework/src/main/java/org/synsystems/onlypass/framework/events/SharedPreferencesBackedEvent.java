@@ -20,9 +20,9 @@ public class SharedPreferencesBackedEvent implements Event {
    * Constructs a new SharedPreferencesBackedEvent.
    *
    * @param sharedPrefs
-   *     the preferences to store the record in
-   *     the key to store the record with
+   *     the shared preferences to store the record in
    * @param key
+   *     the shared preferences key to use when storing the event
    */
   public SharedPreferencesBackedEvent(@NonNull final SharedPreferences sharedPrefs, @NonNull final String key) {
     this.sharedPrefs = checkNotNull(sharedPrefs);
