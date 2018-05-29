@@ -1,7 +1,6 @@
 package org.synsystems.onlypass.components;
 
 import android.app.Application;
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
@@ -23,12 +22,10 @@ import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.TRUE;
 
 /**
- * The core application class. For convenience, activities running under this application can get an instance via
- * {@link #getFromContext(Context)}.
+ * The core application class.
  */
 public abstract class App extends Application {
   @Inject
