@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import io.reactivex.Completable;
+import io.reactivex.Single;
 
 /**
  * Utility for performing Android view animations reactively.
@@ -21,17 +22,23 @@ public class RxAnimations {
    *
    * @return a new completable that performs the animation
    */
-  @NonNull
   public static Completable transitionAlpha(
       @NonNull final View view,
       final int endAlpha,
-      final int durationMilliseconds) {
+      final int durationMilliseconds,
+      final boolean skipIfUnnecessary) {
 
-    return Completable.create(emitter -> view
+    final Single<Boolean> skipAnimation = Single
+        .fromCallable(view::getAlpha)
+        .map(currentAlpha -> currentAlpha == endAlpha && skipIfUnnecessary);
+
+    final Completable animation = Completable.create(emitter -> view
         .animate()
         .alpha(endAlpha)
         .setDuration(durationMilliseconds)
         .withEndAction(emitter::onComplete)
         .start());
+
+    return skipAnimation.flatMapCompletable(skip -> skip ? Completable.complete() : animation);
   }
 }
