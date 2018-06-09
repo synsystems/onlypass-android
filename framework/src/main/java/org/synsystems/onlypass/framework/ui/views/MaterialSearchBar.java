@@ -30,6 +30,10 @@ public class MaterialSearchBar extends MaterialSearchView {
 
   private final PublishSubject<Pulse> searchFinishedEvents = PublishSubject.create();
 
+  private final PublishSubject<Pulse> searchOpened = PublishSubject.create();
+
+  private final PublishSubject<Pulse> searchClosed = PublishSubject.create();
+
   private View searchLayout;
 
   private View searchTopBar;
@@ -89,6 +93,14 @@ public class MaterialSearchBar extends MaterialSearchView {
     return searchFinishedEvents;
   }
 
+  public Observable<Pulse> observeSearchOpened() {
+    return searchOpened;
+  }
+
+  public Observable<Pulse> observeSearchClosed() {
+    return searchClosed;
+  }
+
   @Override
   public void showSearch() {
     showSearchRx().subscribe();
@@ -110,7 +122,11 @@ public class MaterialSearchBar extends MaterialSearchView {
         @Override
         public boolean onAnimationEnd(final View view) {
           MaterialSearchBar.super.showSearch(false);
+
           emitter.onComplete();
+
+          searchOpened.onNext(Pulse.getInstance());
+
           return false;
         }
 
@@ -158,7 +174,11 @@ public class MaterialSearchBar extends MaterialSearchView {
         @Override
         public boolean onAnimationEnd(final View view) {
           MaterialSearchBar.super.closeSearch();
+
           emitter.onComplete();
+
+          searchClosed.onNext(Pulse.getInstance());
+
           return false;
         }
 
