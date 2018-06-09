@@ -87,7 +87,7 @@ public class MaterialSearchBar extends MaterialSearchView {
     });
   }
 
-  public Observable<String> observeSearchTermChanged() {
+  public Observable<String> observeSearchTerms() {
     return searchTerms;
   }
 
