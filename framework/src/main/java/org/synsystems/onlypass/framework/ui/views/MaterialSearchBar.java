@@ -28,7 +28,7 @@ import io.reactivex.subjects.PublishSubject;
 public class MaterialSearchBar extends MaterialSearchView {
   private final PublishSubject<String> searchTerms = PublishSubject.create();
 
-  private final PublishSubject<Pulse> searchFinishedEvents = PublishSubject.create();
+  private final PublishSubject<Pulse> searchSubmitted = PublishSubject.create();
 
   private final PublishSubject<Pulse> searchOpened = PublishSubject.create();
 
@@ -72,8 +72,10 @@ public class MaterialSearchBar extends MaterialSearchView {
     setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
       @Override
       public boolean onQueryTextSubmit(final String query) {
-        searchFinishedEvents.onNext(Pulse.getInstance());
+        searchSubmitted.onNext(Pulse.getInstance());
+
         hideKeyboard(MaterialSearchBar.this);
+
         return true; // => handled
       }
 
@@ -89,8 +91,8 @@ public class MaterialSearchBar extends MaterialSearchView {
     return searchTerms;
   }
 
-  public Observable<Pulse> observeSearchCleared() {
-    return searchFinishedEvents;
+  public Observable<Pulse> observeSearchSubmitted() {
+    return searchSubmitted;
   }
 
   public Observable<Pulse> observeSearchOpened() {
