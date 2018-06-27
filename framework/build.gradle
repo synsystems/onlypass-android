@@ -51,6 +51,7 @@ apply from: rootProject.file('dependencies.gradle')
 
 dependencies {
   api project.ext.dependencies.androidSupport.appCompat
+  api project.ext.dependencies.androidSupport.design
 
   api project.ext.dependencies.rxJava
 
