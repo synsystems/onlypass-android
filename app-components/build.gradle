@@ -54,6 +54,7 @@ dependencies {
 
   api project.ext.dependencies.androidSupport.appCompat
   api project.ext.dependencies.androidSupport.design
+  implementation project.ext.dependencies.androidSupport.cardView
 
   api project.ext.dependencies.rxJava
 
