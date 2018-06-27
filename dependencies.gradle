@@ -15,6 +15,8 @@ ext.dependencies = [
 
     rxbindings: 'com.jakewharton.rxbinding2:rxbinding:2.1.1',
 
+    rxmvpandroid: 'com.matthew-tamlin:rxmvpandroid:3.0.0',
+
     dagger: [
         runtime: 'com.google.dagger:dagger:2.15',
         compiler: 'com.google.dagger:dagger-compiler:2.15',
