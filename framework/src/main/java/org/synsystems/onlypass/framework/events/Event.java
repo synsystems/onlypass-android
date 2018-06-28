@@ -10,19 +10,19 @@ import io.reactivex.Single;
  */
 public interface Event {
   /**
-   * @return a single that emits true if this event has occurred, false otherwise
+   * @return a new single that emits true if this event has occurred, false otherwise
    */
   @NonNull
   public Single<Boolean> hasOccurred();
 
   /**
-   * @return a completable that records the event as having occurred
+   * @return a new completable that records the event as having occurred
    */
   @NonNull
   public Completable recordOccurrence();
 
   /**
-   * @return a completable that clears any record of the event
+   * @return a new completable that clears any record of the event
    */
   @NonNull
   public Completable clearRecord();

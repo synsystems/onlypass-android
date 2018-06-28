@@ -1,7 +1,7 @@
 ext.dependencies = [
     junit: 'junit:junit:4.12',
 
-    mockito: 'org.mockito:mockito-core:1.10.19',
+    mockito: 'org.mockito:mockito-core:2.18.3',
 
     hamcrest: 'org.hamcrest:hamcrest-all:1.3',
 
@@ -11,9 +11,11 @@ ext.dependencies = [
 
     rxJava: 'io.reactivex.rxjava2:rxjava:2.1.12',
 
-    rxAndroidCore: 'io.reactivex.rxjava2:rxandroid:2.0.2',
+    rxandroid: 'io.reactivex.rxjava2:rxandroid:2.0.2',
 
-    rxAndroidBindings: 'com.jakewharton.rxbinding2:rxbinding:2.1.1',
+    rxbindings: 'com.jakewharton.rxbinding2:rxbinding:2.1.1',
+
+    rxmvpandroid: 'com.matthew-tamlin:rxmvpandroid:3.0.0',
 
     dagger: [
         runtime: 'com.google.dagger:dagger:2.15',
@@ -34,7 +36,8 @@ ext.dependencies = [
         percent: 'com.android.support:percent:27.1.0',
         vectorDrawable: 'com.android.support:support-vector-drawable:27.1.0',
         animatedVectorDrawable: 'com.android.support:animated-vector-drawable:27.1.0',
-        multidex: 'com.android.support:multidex:1.0.3'
+        multidex: 'com.android.support:multidex:1.0.3',
+        constraintLayout: 'com.android.support.constraint:constraint-layout:1.1.2'
     ],
 
     androidTestingSupport: [
@@ -103,5 +106,7 @@ ext.dependencies = [
         io: 'commons-io:commons-io:2.6'
     ],
 
-    phoenix: 'com.jakewharton:process-phoenix:2.0.0'
+    phoenix: 'com.jakewharton:process-phoenix:2.0.0',
+
+    materialSearchView: 'com.miguelcatalan:materialsearchview:1.4.0'
 ]

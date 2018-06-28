@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
 
 android {
   dexOptions {
@@ -48,12 +47,14 @@ android {
 apply from: rootProject.file('dependencies.gradle')
 
 dependencies {
-  implementation project(':framework')
+  api project(':framework')
 
   implementation project.ext.dependencies.dagger.runtime
   annotationProcessor project.ext.dependencies.dagger.compiler
 
   api project.ext.dependencies.androidSupport.appCompat
+  api project.ext.dependencies.androidSupport.design
+  implementation project.ext.dependencies.androidSupport.cardView
 
   api project.ext.dependencies.rxJava
 
@@ -78,6 +79,8 @@ dependencies {
   annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
 
   implementation project.ext.dependencies.gson
+
+  implementation project.ext.dependencies.androidUtilities
 
   testImplementation project.ext.dependencies.junit
 

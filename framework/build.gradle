@@ -51,12 +51,30 @@ apply from: rootProject.file('dependencies.gradle')
 
 dependencies {
   api project.ext.dependencies.androidSupport.appCompat
+  api project.ext.dependencies.androidSupport.design
 
   api project.ext.dependencies.rxJava
 
   api project.ext.dependencies.jodaTime
 
+  api project.ext.dependencies.gson
+
   implementation project.ext.dependencies.guava
+
+  implementation project.ext.dependencies.apacheCommons.io
+
+  api (project.ext.dependencies.materialSearchView) {
+    exclude group: 'com.android.support'
+  }
+
+  compileOnly project.ext.dependencies.autoValue.annotations
+  implementation project.ext.dependencies.autoValue.gsonPluginRuntime
+  annotationProcessor project.ext.dependencies.autoValue.compiler
+  annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
+
+  testImplementation project.ext.dependencies.junit
+
+  testImplementation project.ext.dependencies.mockito
 
   androidTestImplementation project.ext.dependencies.junit
 

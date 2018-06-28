@@ -56,6 +56,8 @@ android {
       jniDebuggable true
       renderscriptDebuggable true
       pseudoLocalesEnabled true
+
+      signingConfig signingConfigs.debug
     }
 
     externalTesting {
@@ -70,6 +72,8 @@ android {
       jniDebuggable true
       renderscriptDebuggable true
       pseudoLocalesEnabled true
+
+      signingConfig signingConfigs.debug
     }
 
     prod {
@@ -101,6 +105,8 @@ dependencies {
   implementation project.ext.dependencies.androidSupport.annotations
 
   implementation project.ext.dependencies.androidTestingTools
+
+  implementation project.ext.dependencies.guava
 }
 
 task deleteOutputDirectories {
