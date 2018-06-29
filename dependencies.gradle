@@ -108,5 +108,7 @@ ext.dependencies = [
 
     phoenix: 'com.jakewharton:process-phoenix:2.0.0',
 
-    materialSearchView: 'com.miguelcatalan:materialsearchview:1.4.0'
+    materialSearchView: 'com.miguelcatalan:materialsearchview:1.4.0',
+
+    kotlinStdLib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.miscVersionInformation.kotlinVersion"
 ]
