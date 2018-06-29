@@ -59,7 +59,8 @@ ext.sdkVersionInformation = [
 ]
 
 ext.miscVersionInformation = [
-    androidBuildTools: '27.0.3'
+    androidBuildTools: '27.0.3',
+    kotlinVersion: '1.2.50'
 ]
 
 task deleteAllOutputDirectories(dependsOn: [
