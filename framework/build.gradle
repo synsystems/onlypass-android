@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
@@ -45,6 +46,10 @@ android {
       versionNameSuffix rootProject.ext.appVersionInformation.prodVersionName
     }
   }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
 }
 
 apply from: rootProject.file('dependencies.gradle')
@@ -66,6 +71,8 @@ dependencies {
   api (project.ext.dependencies.materialSearchView) {
     exclude group: 'com.android.support'
   }
+
+  implementation project.ext.dependencies.kotlinStdLib
 
   compileOnly project.ext.dependencies.autoValue.annotations
   implementation project.ext.dependencies.autoValue.gsonPluginRuntime
