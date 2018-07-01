@@ -112,5 +112,7 @@ ext.dependencies = [
 
     materialSearchView: 'com.miguelcatalan:materialsearchview:1.4.0',
 
-    kotlinStdLib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.miscVersionInformation.kotlinVersion"
+    kotlinStdLib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.miscVersionInformation.kotlinVersion",
+
+    anko: 'org.jetbrains.anko:anko:0.10.5'
 ]
