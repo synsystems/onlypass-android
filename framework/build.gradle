@@ -60,6 +60,8 @@ dependencies {
 
   api project.ext.dependencies.rxJava
 
+  implementation project.ext.dependencies.rxKotlin
+
   api project.ext.dependencies.jodaTime
 
   api project.ext.dependencies.gson
