@@ -5,10 +5,10 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
- * An event recorded in shared preferences.
+ * An [Event] that is recorded in shared preferences.
  *
  * @property sharedPrefs the shared preferences to use for persistence
- * @property key the key used to store events in [sharedPrefs]
+ * @property key the key to use when storing events in [sharedPrefs]
  */
 class SharedPreferencesBackedEvent(
     private val sharedPrefs: SharedPreferences,
