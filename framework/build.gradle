@@ -85,6 +85,8 @@ dependencies {
 
   testImplementation project.ext.dependencies.mockito
 
+  testImplementation project.ext.dependencies.assertk
+
   androidTestImplementation project.ext.dependencies.junit
 
   androidTestImplementation project.ext.dependencies.dexmaker.core
