@@ -114,5 +114,7 @@ ext.dependencies = [
 
     kotlinStdLib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.miscVersionInformation.kotlinVersion",
 
-    anko: 'org.jetbrains.anko:anko:0.10.5'
+    anko: 'org.jetbrains.anko:anko:0.10.5',
+
+    assertk: 'com.willowtreeapps.assertk:assertk:0.10'
 ]
