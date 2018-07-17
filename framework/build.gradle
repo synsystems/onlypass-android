@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'de.mannodermaus.android-junit5'
 
 android {
   dexOptions {
@@ -81,13 +82,14 @@ dependencies {
   annotationProcessor project.ext.dependencies.autoValue.compiler
   annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
 
-  testImplementation project.ext.dependencies.junit
+  testImplementation junit5.unitTests()
+  testImplementation junit5.parameterized()
 
   testImplementation project.ext.dependencies.mockito
 
   testImplementation project.ext.dependencies.assertk
 
-  androidTestImplementation project.ext.dependencies.junit
+  androidTestImplementation junit5.instrumentationTests()
 
   androidTestImplementation project.ext.dependencies.dexmaker.core
   androidTestImplementation project.ext.dependencies.dexmaker.mockitoPlugin
