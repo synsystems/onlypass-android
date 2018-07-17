@@ -89,6 +89,8 @@ dependencies {
 
   testImplementation project.ext.dependencies.assertk
 
+  testImplementation project.ext.dependencies.junitExtensions
+
   androidTestImplementation junit5.instrumentationTests()
 
   androidTestImplementation project.ext.dependencies.dexmaker.core
