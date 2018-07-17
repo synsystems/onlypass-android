@@ -116,5 +116,7 @@ ext.dependencies = [
 
     anko: 'org.jetbrains.anko:anko:0.10.5',
 
-    assertk: 'com.willowtreeapps.assertk:assertk:0.10'
+    assertk: 'com.willowtreeapps.assertk:assertk:0.10',
+
+    junitExtensions: 'io.github.glytching:junit-extensions:2.2.0',
 ]
