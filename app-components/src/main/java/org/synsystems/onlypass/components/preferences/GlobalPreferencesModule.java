@@ -1,7 +1,6 @@
 package org.synsystems.onlypass.components.preferences;
 
 import org.synsystems.onlypass.components.AppScope;
-import org.synsystems.onlypass.framework.rxutils.Pulse;
 
 import dagger.Module;
 import dagger.Provides;
