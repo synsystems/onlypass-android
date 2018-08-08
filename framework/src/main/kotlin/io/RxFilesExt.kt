@@ -125,7 +125,7 @@ private fun File.assertExists() {
 }
 
 private fun File.assertNotExists() {
-  if (exists()) throw IOException("$this exists")
+  if (exists()) throw IOException("$this already exists")
 }
 
 private fun File.assertIsFile() {
