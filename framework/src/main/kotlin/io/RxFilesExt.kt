@@ -23,7 +23,7 @@ fun File.createAsFile() = Completable.fromRunnable {
 }
 
 /**
- * Creates this as a directory. The operation completes normally if the directory already exists.
+ * Creates this as a directory. The operation completes normally if the directory already exists as a directory.
  *
  * @throws IOException if this already exists as a file
  */
