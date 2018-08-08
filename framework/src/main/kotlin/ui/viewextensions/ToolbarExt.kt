@@ -5,5 +5,5 @@ import android.support.v7.widget.Toolbar
 import io.reactivex.Completable
 
 fun Toolbar.setOverflowIconColor(color: Int) = Completable.fromRunnable {
-  overflowIcon?.apply { this.setColorFilter(color, PorterDuff.Mode.MULTIPLY) }
+  overflowIcon?.apply { setColorFilter(color, PorterDuff.Mode.MULTIPLY) }
 }

@@ -10,8 +10,7 @@ import org.joda.time.Period
  */
 fun View.transitionAlpha(alpha: Float, duration: Period) = Completable.defer {
   val animation = Completable.create { emitter ->
-    this
-        .animate()
+    animate()
         .alpha(alpha)
         .setDuration(duration.millis.toLong())
         .withEndAction { emitter.onComplete() }
