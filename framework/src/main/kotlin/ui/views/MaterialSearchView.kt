@@ -14,7 +14,6 @@ import com.miguelcatalan.materialsearchview.utils.AnimationUtil
 import com.miguelcatalan.materialsearchview.utils.AnimationUtil.AnimationListener
 import io.reactivex.Completable
 import io.reactivex.CompletableEmitter
-import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import org.synsystems.onlypass.framework.R
 import org.synsystems.onlypass.framework.rxutils.Pulse
@@ -42,12 +41,12 @@ class MaterialSearchView @JvmOverloads constructor(
   init {
     ContextCompat
         .getDrawable(context, R.drawable.icon_back_arrow_white)!!
-        .apply { this.setColorFilter(Color.BLACK, Mode.SRC_IN) }
+        .apply { setColorFilter(Color.BLACK, Mode.SRC_IN) }
         .let { setBackIcon(it) }
 
     ContextCompat
         .getDrawable(context, R.drawable.ic_action_navigation_close)!!
-        .apply { this.setColorFilter(Color.BLACK, Mode.SRC_IN) }
+        .apply { setColorFilter(Color.BLACK, Mode.SRC_IN) }
         .let { setCloseIcon(it) }
 
     setOnQueryTextListener(object : OnQueryTextListener {
@@ -64,13 +63,13 @@ class MaterialSearchView @JvmOverloads constructor(
     })
   }
 
-  fun observeSearchTerms(): Observable<String> = searchTerms
+  fun observeSearchTerms() = searchTerms
 
-  fun observeSearchSubmitted(): Observable<Pulse> = searchSubmitted
+  fun observeSearchSubmitted() = searchSubmitted
 
-  fun observeSearchOpened(): Observable<Pulse> = searchOpened
+  fun observeSearchOpened() = searchOpened
 
-  fun observeSearchClosed(): Observable<Pulse> = searchClosed
+  fun observeSearchClosed() = searchClosed
 
   override fun showSearch() = showSearchRx().blockingAwait()
 
@@ -134,16 +133,18 @@ class MaterialSearchView @JvmOverloads constructor(
    * An [AnimationUtil] that uses a material reveal animation to show and hide the search bar.
    */
   internal object MaterialAnimationUtil {
-    fun reveal(view: View, listener: AnimationListener, revealPointXPx: Int, revealPointYPx: Int) {
+    fun reveal(view: View, listener: AnimationListener, focalPointXPx: Int, focalPointYPx: Int) {
+      val startRadius = 0
       val endRadius = Math.max(view.width, view.height)
 
-      doCircularReveal(view, listener, revealPointXPx, revealPointYPx, 0, endRadius)
+      doCircularReveal(view, listener, focalPointXPx, focalPointYPx, startRadius, endRadius)
     }
 
-    fun conceal(view: View, listener: AnimationListener, concealPointXPx: Int, concealPointYPx: Int) {
+    fun conceal(view: View, listener: AnimationListener, focalPointXPx: Int, focalPointYPx: Int) {
       val startRadius = Math.max(view.width, view.height)
+      val endRadius = 0
 
-      doCircularReveal(view, listener, concealPointXPx, concealPointYPx, startRadius, 0)
+      doCircularReveal(view, listener, focalPointXPx, focalPointYPx, startRadius, endRadius)
     }
 
     private fun doCircularReveal(
@@ -163,11 +164,17 @@ class MaterialSearchView @JvmOverloads constructor(
           endRadius.toFloat())
 
       animation.addListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator) = listener.onAnimationStart(view).let { }
+        override fun onAnimationStart(animation: Animator) {
+          listener.onAnimationStart(view)
+        }
 
-        override fun onAnimationEnd(animation: Animator) = listener.onAnimationEnd(view).let { }
+        override fun onAnimationEnd(animation: Animator) {
+          listener.onAnimationEnd(view)
+        }
 
-        override fun onAnimationCancel(animation: Animator) = listener.onAnimationCancel(view).let { }
+        override fun onAnimationCancel(animation: Animator) {
+          listener.onAnimationCancel(view)
+        }
       })
 
       animation.start()
