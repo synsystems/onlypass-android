@@ -5,27 +5,25 @@ import org.synsystems.onlypass.components.cryptography.credentials.InsecureCrede
 import org.synsystems.onlypass.components.cryptography.credentials.SecureCredential
 
 /**
- * Hardens [InsecureCredential] to produce [SecureCredential][secure credentials].
+ * Hardens [InsecureCredential]s to produce [SecureCredential]s.
  *
- * @param <I>
- * the type of insecure credentials to be hardened
- * @param <S>
- * the type of secure credentials produced by hardening
- * @param <P>
- * the type of parameters for configuration on a per-harden basis
+ * @param I the type of insecure credentials to be hardened
+ * @param S the type of secure credentials produced by hardening
+ * @param P the type of parameters used to control hardening
  */
 interface CredentialHardener<I : InsecureCredential, S : SecureCredential, P : HardeningParameters> {
 
-    /**
-     * Hardens an insecure credential thereby producing a secure credential. Each call with the same arguments must
-     * produce the same result.
-     *
-     * @param insecureCredential
-     * the credential to harden
-     * @param hardeningParameters
-     * parameters that configure the hardening process
-     *
-     * @return a new single that emits the secure credential
-     */
-    fun hardenCredential(insecureCredential: I, hardeningParameters: P): Single<S>
+  /**
+   * Hardens [insecureCredential]. Calls with the same arguments must be idempotent.
+   *
+   * @param hardeningParameters parameters that configure the hardening process
+   *
+   * @return the secure credential produced by hardening
+   */
+  fun hardenCredential(insecureCredential: I, hardeningParameters: P): Single<S>
 }
+
+/**
+ * Parameters for configuring credential hardening on a per-harden basis.
+ */
+interface HardeningParameters
