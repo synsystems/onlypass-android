@@ -10,7 +10,7 @@ import javax.crypto.spec.SecretKeySpec
  */
 class DerivedKeyCredentialConverter : CredentialConverter<DerivedKey> {
 
-  override fun toSecretKeySpec(credential: DerivedKey): Single<SecretKeySpec> = Single.fromCallable {
-    SecretKeySpec(credential.key.encoded, "AES")
+  override fun toSecretKeySpec(credential: DerivedKey): Single<SecretKeySpec> {
+    return Single.fromCallable { SecretKeySpec(credential.key.encoded, "AES") }
   }
 }

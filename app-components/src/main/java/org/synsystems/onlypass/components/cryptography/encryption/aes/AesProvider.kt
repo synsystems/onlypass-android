@@ -71,20 +71,24 @@ class AesProvider<C : Credential> constructor(private val credentialConverter: C
   private fun prepareCipherForDecryption(
       key: SecretKey,
       initialisationVector: IvParameterSpec
-  ) = Completable.fromRunnable {
+  ): Completable {
 
-    GCMParameterSpec(initialisationVector.iv.size, initialisationVector.iv).let {
-      cipher.init(Cipher.DECRYPT_MODE, key, it)
+    return Completable.fromRunnable {
+      GCMParameterSpec(initialisationVector.iv.size, initialisationVector.iv).let {
+        cipher.init(Cipher.DECRYPT_MODE, key, it)
+      }
     }
   }
 
   private fun prepareCipherForEncryption(
       key: SecretKey,
       initialisationVector: IvParameterSpec
-  ) = Completable.fromRunnable {
+  ) : Completable {
 
-    GCMParameterSpec(initialisationVector.iv.size, initialisationVector.iv).let {
-      cipher.init(Cipher.ENCRYPT_MODE, key, it)
+    return Completable.fromRunnable {
+      GCMParameterSpec(initialisationVector.iv.size, initialisationVector.iv).let {
+        cipher.init(Cipher.ENCRYPT_MODE, key, it)
+      }
     }
   }
 
