@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException
 import java.util.concurrent.TimeUnit.MILLISECONDS
 
 class TestPbkdf2WithHmacSha256CredentialHardener {
+
   private lateinit var credentialHardener: Pbkdf2WithHmacSha256CredentialHardener
 
   @Before

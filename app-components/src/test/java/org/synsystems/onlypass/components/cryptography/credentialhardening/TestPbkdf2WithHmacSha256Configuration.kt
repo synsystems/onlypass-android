@@ -3,6 +3,7 @@ package org.synsystems.onlypass.components.cryptography.credentialhardening
 import org.junit.Test
 
 class TestPbkdf2WithHmacSha256Configuration {
+
   @Test(expected = RuntimeException::class)
   fun testBuild_emptySaltSet() = Pbkdf2WithHmacSha256Configuration(arrayOf(), 1, 8)
 
