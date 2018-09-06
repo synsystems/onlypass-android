@@ -6,5 +6,4 @@ class DevApp : App() {
 
   @Override
   protected fun createAppComponent(): = DaggerDevAppComponent.create()
-
 }
