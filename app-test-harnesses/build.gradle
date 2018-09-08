@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
   dexOptions {
@@ -91,6 +92,10 @@ android {
     }
   }
 
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+
   lintOptions {
     abortOnError false
   }
@@ -107,9 +112,14 @@ dependencies {
   implementation project.ext.dependencies.androidTestingTools
 
   implementation project.ext.dependencies.guava
+
+  implementation project.ext.dependencies.kotlinStdLib
 }
 
 task deleteOutputDirectories {
   delete('build')
   delete('out')
+}
+repositories {
+  mavenCentral()
 }
