@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
   dexOptions {
@@ -55,7 +56,7 @@ dependencies {
   api project(':framework')
 
   implementation project.ext.dependencies.dagger.runtime
-  annotationProcessor project.ext.dependencies.dagger.compiler
+  kapt project.ext.dependencies.dagger.compiler
 
   api project.ext.dependencies.androidSupport.appCompat
   api project.ext.dependencies.androidSupport.design
@@ -78,11 +79,6 @@ dependencies {
 
   implementation project.ext.dependencies.phoenix
   
-  compileOnly project.ext.dependencies.autoValue.annotations
-  implementation project.ext.dependencies.autoValue.gsonPluginRuntime
-  annotationProcessor project.ext.dependencies.autoValue.compiler
-  annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
-
   implementation project.ext.dependencies.gson
 
   implementation project.ext.dependencies.androidUtilities

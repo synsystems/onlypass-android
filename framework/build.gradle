@@ -78,11 +78,6 @@ dependencies {
 
   implementation project.ext.dependencies.kotlinStdLib
 
-  compileOnly project.ext.dependencies.autoValue.annotations
-  implementation project.ext.dependencies.autoValue.gsonPluginRuntime
-  annotationProcessor project.ext.dependencies.autoValue.compiler
-  annotationProcessor project.ext.dependencies.autoValue.gsonPluginCompiler
-
   testImplementation project.ext.dependencies.junit
 
   testImplementation project.ext.dependencies.mockito

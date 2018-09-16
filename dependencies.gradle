@@ -101,7 +101,7 @@ ext.dependencies = [
 
     androidUtilities: 'com.matthew-tamlin:android-utilities:5.1.1',
 
-    androidTestingTools: 'com.matthew-tamlin:android-testing-tools:3.0.1',
+    androidTestingTools: 'com.matthew-tamlin:android-testing-tools:3.0.2',
 
     apacheCommons: [
         lang: 'org.apache.commons:commons-lang3:3.6',
