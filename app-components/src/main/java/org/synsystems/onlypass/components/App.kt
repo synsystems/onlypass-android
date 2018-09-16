@@ -19,7 +19,7 @@ import javax.inject.Inject
 /**
  * The core application class.
  */
-abstract class App : Application() {
+class App : Application() {
 
   @Inject
   protected lateinit var environment: Environment
@@ -36,18 +36,14 @@ abstract class App : Application() {
   @Inject
   protected lateinit var globalPreferences: GlobalPreferences
 
-  private lateinit var appComponent: AppComponent
-  fun getAppComponent() = appComponent
+  private val appComponent = DaggerAppComponent.create()
 
   private lateinit var applicationTasks: Disposable
-
-  protected abstract fun createAppComponent(): AppComponent
 
   override fun onCreate() {
     super.onCreate()
 
     val setupApplication = Completable.concatArray(
-        setupDagger(),
         injectDependencies(),
         setupLocalLogging(),
         setupStetho())
@@ -64,8 +60,6 @@ abstract class App : Application() {
 
     super.onTerminate()
   }
-
-  private fun setupDagger() = Completable.fromRunnable { appComponent = createAppComponent() }
 
   private fun injectDependencies() = Completable.fromRunnable { appComponent.inject(this) }
 
